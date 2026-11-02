@@ -7,7 +7,7 @@
   background:
     radial-gradient(ellipse 50% 60% at 15% 0%, rgba(246, 205, 225, 0.08) 0%, transparent 60%),
     radial-gradient(ellipse 40% 50% at 85% 100%, rgba(127, 178, 214, 0.08) 0%, transparent 60%),
-    linear-gradient(180deg, #0a1428 0%, var(--rc-navy) 50%, #0a1428 100%);
+    linear-gradient(180deg, #0d1a33 0%, var(--rc-navy) 100%);
   color: #fff;
   font-size: 0.9rem;
   isolation: isolate;
