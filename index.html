@@ -657,72 +657,75 @@
   </dialog>
 </section>
 
-    <!-- AWARDS: dark immersive gallery -->
+    <!-- AWARDS: editorial split -->
     <section class="awards" id="awards" data-awards>
-      <div class="awards__container">
-        <!-- Head -->
-        <div class="awards__head">
+      <div class="container awards__layout">
+
+        <!-- Left — big typographic narrative -->
+        <div class="awards__narrative">
           <p class="awards__eyebrow"><span class="awards__eyebrow-dot" aria-hidden="true"></span>Recognised by the industry</p>
+          <div class="awards__big-stat">
+            <strong class="awards__big-num">5</strong>
+            <span class="awards__spark" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M12 0c.6 6.2 5.8 11.4 12 12-6.2.6-11.4 5.8-12 12-.6-6.2-5.8-11.4-12-12C6.2 11.4 11.4 6.2 12 0z"/></svg>
+            </span>
+            <span class="awards__big-label">industry<br>awards</span>
+          </div>
           <h2 class="awards__heading">
-            Award-winning <span class="awards__heading-accent">two years running.</span>
+            Two consecutive years of <span class="awards__heading-accent">winning work.</span>
           </h2>
-          <p class="awards__sub">Five independent industry awards across PropTech innovation, cyber safety and operational excellence.</p>
+          <p class="awards__sub">Independently recognised by the Australian PropTech industry for innovation in security, operational efficiency and startup achievement.</p>
+          <ul class="awards__categories" aria-label="Recognition categories">
+            <li>PropTech Innovation</li>
+            <li>Cyber Safety</li>
+            <li>Operational Excellence</li>
+          </ul>
         </div>
 
-        <!-- Horizontal strip of all 5 badges with year dividers -->
-        <div class="awards__strip" role="list">
+        <!-- Right — year-grouped badge gallery -->
+        <div class="awards__gallery">
 
-          <!-- 2024 group -->
-          <div class="awards__year-tag" aria-hidden="true"><span>2024</span></div>
+          <div class="aw-year">
+            <div class="aw-year__label">
+              <span class="aw-year__num">2024</span>
+              <span class="aw-year__dash" aria-hidden="true"></span>
+              <span class="aw-year__count">3 wins</span>
+            </div>
+            <div class="aw-year__badges">
+              <figure class="aw-badge">
+                <img src="/assets/images/awards/05-2024-proptech-of-the-year-startup-winner.png" alt="2024 PropTech of the Year — Startup — Winner" width="200" height="200" loading="lazy">
+                <figcaption>PropTech of the Year<small>Startup</small></figcaption>
+              </figure>
+              <figure class="aw-badge">
+                <img src="/assets/images/awards/03-2024-cyber-safe-proptech-winner.png" alt="2024 Cyber Safe PropTech — Winner" width="200" height="200" loading="lazy">
+                <figcaption>Cyber Safe PropTech<small>Security</small></figcaption>
+              </figure>
+              <figure class="aw-badge">
+                <img src="/assets/images/awards/04-2024-administration-efficiency-winner.png" alt="2024 Administration Efficiency — Winner" width="200" height="200" loading="lazy">
+                <figcaption>Administration Efficiency<small>Operations</small></figcaption>
+              </figure>
+            </div>
+          </div>
 
-          <article class="aw-item" role="listitem">
-            <div class="aw-item__glow" aria-hidden="true"></div>
-            <img class="aw-item__badge" src="/assets/images/awards/05-2024-proptech-of-the-year-startup-winner.png" alt="2024 PropTech of the Year — Startup — Winner" width="220" height="220" loading="lazy">
-            <p class="aw-item__title">PropTech of the Year</p>
-            <p class="aw-item__cat">Startup Winner</p>
-          </article>
-
-          <article class="aw-item" role="listitem">
-            <div class="aw-item__glow" aria-hidden="true"></div>
-            <img class="aw-item__badge" src="/assets/images/awards/03-2024-cyber-safe-proptech-winner.png" alt="2024 Cyber Safe PropTech — Winner" width="220" height="220" loading="lazy">
-            <p class="aw-item__title">Cyber Safe PropTech</p>
-            <p class="aw-item__cat">Security Winner</p>
-          </article>
-
-          <article class="aw-item" role="listitem">
-            <div class="aw-item__glow" aria-hidden="true"></div>
-            <img class="aw-item__badge" src="/assets/images/awards/04-2024-administration-efficiency-winner.png" alt="2024 Administration Efficiency — Winner" width="220" height="220" loading="lazy">
-            <p class="aw-item__title">Administration Efficiency</p>
-            <p class="aw-item__cat">Operations Winner</p>
-          </article>
-
-          <!-- Divider -->
-          <div class="awards__divider" aria-hidden="true"></div>
-
-          <!-- 2023 group -->
-          <div class="awards__year-tag" aria-hidden="true"><span>2023</span></div>
-
-          <article class="aw-item" role="listitem">
-            <div class="aw-item__glow" aria-hidden="true"></div>
-            <img class="aw-item__badge" src="/assets/images/awards/01-2023-cyber-safe-proptech-winner.png" alt="2023 Cyber Safe PropTech — Winner" width="220" height="220" loading="lazy">
-            <p class="aw-item__title">Cyber Safe PropTech</p>
-            <p class="aw-item__cat">Security Winner</p>
-          </article>
-
-          <article class="aw-item" role="listitem">
-            <div class="aw-item__glow" aria-hidden="true"></div>
-            <img class="aw-item__badge" src="/assets/images/awards/02-2023-efficiency-optimisation-winner.png" alt="2023 Efficiency Optimisation — Winner" width="220" height="220" loading="lazy">
-            <p class="aw-item__title">Efficiency Optimisation</p>
-            <p class="aw-item__cat">Workflow Winner</p>
-          </article>
+          <div class="aw-year">
+            <div class="aw-year__label">
+              <span class="aw-year__num">2023</span>
+              <span class="aw-year__dash" aria-hidden="true"></span>
+              <span class="aw-year__count">2 wins</span>
+            </div>
+            <div class="aw-year__badges">
+              <figure class="aw-badge">
+                <img src="/assets/images/awards/01-2023-cyber-safe-proptech-winner.png" alt="2023 Cyber Safe PropTech — Winner" width="200" height="200" loading="lazy">
+                <figcaption>Cyber Safe PropTech<small>Security</small></figcaption>
+              </figure>
+              <figure class="aw-badge">
+                <img src="/assets/images/awards/02-2023-efficiency-optimisation-winner.png" alt="2023 Efficiency Optimisation — Winner" width="200" height="200" loading="lazy">
+                <figcaption>Efficiency Optimisation<small>Workflow</small></figcaption>
+              </figure>
+            </div>
+          </div>
 
         </div>
-
-        <!-- Trust line -->
-        <p class="awards__trustline">
-          <span class="awards__trust-stars" aria-hidden="true">★★★★★</span>
-          <span>Trusted by <strong>500+ Australian conveyancing practices</strong></span>
-        </p>
       </div>
     </section>
   </main>
@@ -730,36 +733,25 @@
   <!-- FOOTER: modern layered design -->
   <footer class="site-footer">
 
-    <!-- Floating CTA card bridging the content → footer -->
-    <div class="container">
-      <div class="footer__cta">
-        <div class="footer__cta-text">
-          <p class="footer__cta-eyebrow"><span class="footer__cta-dot" aria-hidden="true"></span>Ready to switch?</p>
-          <h2 class="footer__cta-title">Settle smarter from day one.</h2>
-          <p class="footer__cta-sub">A 30-minute demo. Zero obligation. See how it fits the way your team already works.</p>
-        </div>
-        <div class="footer__cta-actions">
-          <a class="footer__cta-btn" href="/book-a-demo/">
-            <span>Book a demo</span>
-            <span class="footer__cta-chip" aria-hidden="true">
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-            </span>
-          </a>
-          <a class="footer__cta-link" href="tel:1300135836">
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.5 2L8 9.6a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2-.5c.8.3 1.7.5 2.6.6a2 2 0 0 1 1.7 2z"/></svg>
-            Or call 1300 135 836
-          </a>
-        </div>
-      </div>
-    </div>
-
     <!-- Main grid -->
     <div class="container footer__grid">
 
       <!-- Brand + contact + social -->
       <div class="footer__brand">
-        <img class="footer__logo" src="/assets/images/logos/rtc-logo-white.svg" alt="Realtime Conveyancer" width="180" height="40">
+        <span class="footer__logo-wrap">
+          <img class="footer__logo" src="/assets/images/logos/RTC-FULL-LOGO-ORIGINAL-COLOURS%20(1).webp" alt="Realtime Conveyancer">
+        </span>
         <p class="footer__tagline">Paperless conveyancing software, built by conveyancers for Australian practices.</p>
+        <div class="footer__cta-row">
+          <a href="/book-a-demo/" class="footer__btn footer__btn--primary">
+            Sign up for a demo
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </a>
+          <a href="#contact" class="footer__btn footer__btn--secondary">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7l9 6 9-6"/><rect x="3" y="5" width="18" height="14" rx="2"/></svg>
+            Stay connected
+          </a>
+        </div>
         <ul class="footer__contact">
           <li>
             <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
@@ -836,6 +828,7 @@
         All systems operational
       </p>
     </div>
+
   </footer>
 
   <script src="/assets/js/main.js" defer></script>

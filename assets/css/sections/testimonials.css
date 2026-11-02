@@ -82,6 +82,22 @@
   transform-style: preserve-3d; transition: transform .8s cubic-bezier(.2,.8,.2,1), opacity .6s ease, filter .6s ease;
   opacity: 0; pointer-events: none;
 }
+/* Thin coloured accent at the top of each card (cycles blue → pink → green) */
+.rct-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 15%;
+  right: 15%;
+  height: 3px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    var(--accent) 30%,
+    var(--accent) 70%,
+    transparent 100%);
+  border-radius: 0 0 3px 3px;
+  z-index: 2;
+}
 .rct-card:nth-child(3n+2) { --accent: var(--pink); --accent-soft: var(--pink-soft); }
 .rct-card:nth-child(3n+3) { --accent: var(--green); --accent-soft: var(--green-soft); }
 .rct-card[data-pos="0"]  { transform: translateX(0) scale(1); opacity: 1; z-index: 3; pointer-events: auto; }
