@@ -1,0 +1,39 @@
+/* Trust line: static strip between hero and bento.
+   Centered 5 pink stars + "Trusted by 500+ Australian conveyancing practices". */
+
+.trustline {
+  background: var(--rc-white);
+  border-bottom: 1px solid var(--rc-border);
+  padding: 1.1rem 0;
+}
+.trustline__inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9rem;
+  flex-wrap: wrap;
+}
+.trustline__stars {
+  display: inline-flex;
+  gap: 2px;
+  color: var(--rc-pink);
+}
+.trustline__text {
+  margin: 0;
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--rc-navy);
+  opacity: 0.85;
+  letter-spacing: 0.005em;
+}
+.trustline__text strong {
+  font-weight: 700;
+  color: var(--rc-navy);
+  opacity: 1;
+}
+
+@media (max-width: 540px) {
+  .trustline { padding: 0.9rem 0; }
+  .trustline__inner { gap: 0.6rem; }
+  .trustline__text { font-size: 0.82rem; text-align: center; }
+}

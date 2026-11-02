@@ -1,0 +1,16 @@
+/* Shared components: buttons, badges, cards.
+   Basic versions only; refined when the first section uses them. */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+  min-height: 48px; padding: 0 1.5rem;
+  border-radius: var(--rc-radius-pill);
+  font-weight: 700; font-size: var(--rc-text-base); text-decoration: none;
+  border: 1.5px solid transparent; cursor: pointer;
+}
+.btn--primary { background: var(--rc-gradient-button); color: var(--rc-white); }
+.btn--secondary { background: var(--rc-white); color: var(--rc-navy); border-color: var(--rc-navy); }
+.btn-row { display: flex; flex-wrap: wrap; gap: var(--rc-space-2); }
+
+.badge { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.35rem 0.8rem; border-radius: var(--rc-radius-pill); font-size: var(--rc-text-sm); font-weight: 600; }
+
+.card { background: var(--rc-white); border-radius: var(--rc-radius-card); box-shadow: var(--rc-shadow-card); padding: var(--rc-space-4); }

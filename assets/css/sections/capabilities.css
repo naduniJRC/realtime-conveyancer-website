@@ -1,0 +1,524 @@
+/* Capabilities bento — "The Realtime difference"
+   5 tiles. Layout from the reference, brand palette only, modern presentation.
+   Tiles: savings (big navy), portrait (tall), growth (pink), possibilities (soft), cta (dark). */
+
+.capabilities {
+  position: relative;
+  background: var(--rc-surface);
+  padding-block: clamp(4rem, 7vw, 6rem) clamp(4rem, 7vw, 6rem);
+  overflow: hidden;
+}
+
+/* ---------- Section header ---------- */
+.capabilities__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin: 0 0 1.25rem;
+  padding: 0.4rem 0.95rem 0.4rem 0.75rem;
+  background: var(--rc-pink-soft);
+  color: var(--rc-navy);
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.capabilities__eyebrow::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  background: var(--rc-pink);
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px rgba(246, 205, 225, 0.4);
+}
+.capabilities__heading {
+  font-size: clamp(1.75rem, 3.4vw, 2.75rem);
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  color: var(--rc-navy);
+  margin: 0 0 clamp(2rem, 4vw, 3rem);
+  text-wrap: balance;
+}
+.capabilities__heading-accent {
+  display: inline-block;
+  font-style: italic;
+  font-weight: 600;
+  color: var(--rc-navy);
+}
+.capabilities__footnote {
+  margin: 1.5rem 0 0;
+  font-size: 0.78rem;
+  color: var(--rc-muted);
+  line-height: 1.5;
+}
+.capabilities__footnote sup { color: var(--rc-navy-light); }
+
+/* ---------- Grid ---------- */
+.capabilities__grid {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1.1fr;
+  grid-template-areas:
+    "savings portrait growth"
+    "possibilities portrait cta";
+  gap: 1rem;
+}
+
+/* ---------- Base tile ---------- */
+.cap-tile {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(1.5rem, 2.4vw, 2rem);
+  border-radius: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  transition: transform 0.4s cubic-bezier(.4, 0, .2, 1),
+              box-shadow 0.4s ease,
+              opacity 0.6s ease;
+}
+.cap-tile:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 20px 40px rgba(19, 52, 89, 0.1);
+}
+
+/* ---------- Scroll-reveal stagger ---------- */
+.capabilities.js .cap-tile {
+  opacity: 0;
+  transform: translateY(20px);
+}
+.capabilities.js.is-ready .cap-tile {
+  opacity: 1;
+  transform: none;
+}
+.capabilities.js.is-ready .cap-tile:nth-child(1) { transition-delay: 0ms; }
+.capabilities.js.is-ready .cap-tile:nth-child(2) { transition-delay: 90ms; }
+.capabilities.js.is-ready .cap-tile:nth-child(3) { transition-delay: 180ms; }
+.capabilities.js.is-ready .cap-tile:nth-child(4) { transition-delay: 270ms; }
+.capabilities.js.is-ready .cap-tile:nth-child(5) { transition-delay: 360ms; }
+.capabilities.js.is-ready .cap-tile:hover {
+  transform: translateY(-3px);
+  transition-delay: 0ms;
+}
+
+/* ---------- Shared pill-CTA ---------- */
+.cap-tile__pill-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.75rem 0.75rem 0.75rem 1.1rem;
+  background: var(--rc-white);
+  color: var(--rc-navy);
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-decoration: none;
+  width: fit-content;
+  max-width: 100%;
+  margin-top: auto;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.cap-tile__pill-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(19, 52, 89, 0.15);
+}
+.cap-tile__pill-arrow {
+  width: 30px; height: 30px;
+  background: var(--rc-pink);
+  color: var(--rc-navy);
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform 0.35s cubic-bezier(.4, 0, .2, 1);
+}
+.cap-tile__pill-cta:hover .cap-tile__pill-arrow { transform: translateX(3px); }
+.cap-tile__pill-cta--white .cap-tile__pill-arrow {
+  background: var(--rc-navy);
+  color: var(--rc-white);
+}
+
+/* ---------- Shared hero stat ---------- */
+.cap-tile__hero-stat {
+  display: flex;
+  align-items: baseline;
+  gap: 0.1em;
+  line-height: 1;
+}
+.cap-tile__hero-num {
+  font-size: clamp(2.6rem, 5.2vw, 3.8rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+  line-height: 0.95;
+}
+.cap-tile__hero-unit {
+  font-size: clamp(1.1rem, 1.9vw, 1.55rem);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+.cap-tile__hero-sub {
+  margin: 0;
+  font-size: 0.92rem;
+  font-weight: 500;
+  line-height: 1.5;
+  opacity: 0.85;
+}
+.cap-tile__hero-sub sup { font-size: 0.6em; vertical-align: super; }
+.cap-tile__label {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 500;
+  opacity: 0.75;
+}
+
+/* ---------- Shared eyebrow (inside tiles) ---------- */
+.cap-tile__eyebrow {
+  margin: 0;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  opacity: 0.65;
+}
+.cap-tile__eyebrow--pink { color: var(--rc-pink); opacity: 1; }
+
+/* ==================================================
+   TILE 1 — Savings stat (light blue gradient, top-left)
+   ================================================== */
+.cap-tile--savings {
+  grid-area: savings;
+  background: #cfe1ef;
+  color: var(--rc-navy);
+  gap: 0.6rem;
+  min-height: 320px;
+}
+.cap-tile--savings .cap-tile__label { color: var(--rc-navy); opacity: 0.7; }
+.cap-tile--savings .cap-tile__hero-num { color: var(--rc-navy); }
+.cap-tile--savings .cap-tile__hero-unit { color: var(--rc-navy); opacity: 0.6; }
+.cap-tile--savings .cap-tile__hero-sub { color: var(--rc-navy); opacity: 0.75; }
+
+/* Slider visual */
+.cap-slider {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0.6rem 0 1.1rem;
+}
+.cap-slider__from,
+.cap-slider__to {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--rc-navy);
+  opacity: 0.8;
+  font-variant-numeric: tabular-nums;
+}
+.cap-slider__track {
+  position: relative;
+  flex: 1;
+  height: 6px;
+  background: rgba(19, 52, 89, 0.18);
+  border-radius: 999px;
+  overflow: visible;
+}
+.cap-slider__fill {
+  height: 100%;
+  width: 65%;
+  background: linear-gradient(90deg, var(--rc-navy) 0%, var(--rc-pink) 100%);
+  border-radius: 999px;
+  box-shadow: 0 0 16px rgba(246, 205, 225, 0.5);
+  transition: width 1200ms cubic-bezier(0.2, 0.8, 0.2, 1) 400ms;
+}
+.cap-slider__thumb {
+  position: absolute;
+  left: 65%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 18px;
+  height: 18px;
+  background: var(--rc-white);
+  border-radius: 50%;
+  box-shadow:
+    0 2px 10px rgba(19, 52, 89, 0.3),
+    0 0 0 4px rgba(255, 255, 255, 0.4);
+  transition: left 1200ms cubic-bezier(0.2, 0.8, 0.2, 1) 400ms;
+}
+.capabilities.js .cap-slider__fill { width: 0%; }
+.capabilities.js .cap-slider__thumb { left: 0%; }
+.capabilities.js.is-ready .cap-slider__fill { width: 65%; }
+.capabilities.js.is-ready .cap-slider__thumb { left: 65%; }
+.cap-tile--savings .cap-tile__pill-cta {
+  background: var(--rc-navy);
+  color: var(--rc-white);
+}
+.cap-tile--savings .cap-tile__pill-arrow {
+  background: var(--rc-pink);
+  color: var(--rc-navy);
+}
+
+/* ==================================================
+   TILE 2 — Portrait photo (tall, center) — pink-soft bg, contained image
+   ================================================== */
+.cap-tile--portrait {
+  grid-area: portrait;
+  background-color: var(--rc-pink-soft);
+  background-image: url('/assets/images/resources/Pink%20blazer,%20crisp%20white%20ensemble.png');
+  background-size: auto 82%;
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  min-height: 320px;
+  padding: 1.75rem;
+  justify-content: flex-start;
+  transition: transform 0.4s cubic-bezier(.4,0,.2,1),
+              box-shadow 0.4s ease,
+              background-size 0.6s ease;
+}
+.cap-tile--portrait:hover { background-size: auto 86%; }
+.cap-tile__portrait-title {
+  margin: 0;
+  font-size: clamp(1.25rem, 2vw, 1.65rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  color: var(--rc-navy);
+}
+
+/* Floating sticker on the portrait tile */
+.cap-tile__sticker {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.25rem;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  padding: 0.5rem 0.75rem;
+  background: var(--rc-white);
+  border-radius: 14px;
+  box-shadow: 0 10px 24px rgba(19, 52, 89, 0.12),
+              0 2px 6px rgba(19, 52, 89, 0.08);
+  transform: rotate(5deg);
+  transform-origin: top right;
+  transition: transform 0.4s cubic-bezier(.4,0,.2,1);
+  z-index: 2;
+}
+.cap-tile--portrait:hover .cap-tile__sticker {
+  transform: rotate(2deg) translateY(-2px);
+}
+.cap-tile__sticker-stars {
+  font-size: 0.72rem;
+  letter-spacing: 1px;
+  color: #f0a500;
+  line-height: 1;
+}
+.cap-tile__sticker-text {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--rc-navy);
+  letter-spacing: 0.02em;
+}
+
+/* ==================================================
+   TILE 3 — Growth stat (light pink, top-right)
+   ================================================== */
+.cap-tile--growth {
+  grid-area: growth;
+  background: linear-gradient(145deg, var(--rc-pink-soft) 0%, #fef5f9 100%);
+  color: var(--rc-navy);
+  gap: 0.6rem;
+  min-height: 320px;
+}
+.cap-tile--growth .cap-tile__hero-num,
+.cap-tile--growth .cap-tile__hero-unit { color: var(--rc-navy); }
+.cap-tile--growth .cap-tile__hero-sub { color: var(--rc-navy); opacity: 0.75; }
+
+/* Animated bar chart at the bottom of the growth tile */
+.cap-chart {
+  position: relative;
+  margin: auto auto 1rem;
+  max-width: 70%;
+  width: 100%;
+  height: 72px;
+  padding-top: 18px;
+  overflow: hidden;
+  will-change: transform;
+}
+.cap-chart__bars {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 5px;
+  height: 100%;
+}
+.cap-chart__bar {
+  flex: 1;
+  height: var(--bar-h);
+  background: #f4a9c6;
+  border-radius: 6px 6px 2px 2px;
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 1000ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.cap-chart__bar--peak {
+  background: #c86a9b;
+}
+.capabilities.js.is-ready .cap-chart__bar { transform: scaleY(1); }
+.capabilities.js.is-ready .cap-chart__bar:nth-child(1) { transition-delay: 500ms; }
+.capabilities.js.is-ready .cap-chart__bar:nth-child(2) { transition-delay: 600ms; }
+.capabilities.js.is-ready .cap-chart__bar:nth-child(3) { transition-delay: 700ms; }
+.capabilities.js.is-ready .cap-chart__bar:nth-child(4) { transition-delay: 800ms; }
+.capabilities.js.is-ready .cap-chart__bar:nth-child(5) { transition-delay: 900ms; }
+.capabilities.js.is-ready .cap-chart__bar:nth-child(6) { transition-delay: 1000ms; }
+
+.cap-chart__badge {
+  position: absolute;
+  top: 4px;
+  right: 1rem;
+  padding: 0.22rem 0.55rem;
+  background: var(--rc-navy);
+  color: #fff;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  border-radius: 999px;
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: opacity 0.5s ease 1300ms, transform 0.5s ease 1300ms;
+  z-index: 2;
+}
+.capabilities.js.is-ready .cap-chart__badge {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ==================================================
+   TILE 4 — Possibilities (split: text + image, bottom-left)
+   ================================================== */
+.cap-tile--possibilities {
+  grid-area: possibilities;
+  background: var(--rc-blue-soft);
+  color: var(--rc-navy);
+  min-height: 280px;
+  padding: 0;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+}
+.cap-tile__poss-text {
+  padding: clamp(1.5rem, 2vw, 2rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.cap-tile__poss-title {
+  margin: 0;
+  font-size: clamp(1.15rem, 1.75vw, 1.5rem);
+  font-weight: 700;
+  line-height: 1.18;
+  letter-spacing: -0.015em;
+  color: var(--rc-navy);
+}
+.cap-tile__poss-sub {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--rc-navy);
+  opacity: 0.75;
+}
+.cap-tile__poss-image {
+  background:
+    linear-gradient(135deg, transparent 0%, rgba(127, 178, 214, 0.2) 100%),
+    url('/assets/images/resources/Coral%20Shirt%20and%20Rich%20Blue%20Polo-1.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: transform 0.6s cubic-bezier(.4,0,.2,1);
+}
+.cap-tile--possibilities:hover .cap-tile__poss-image { transform: scale(1.05); }
+
+/* ==================================================
+   TILE 5 — CTA (light blue gradient, bottom-right)
+   ================================================== */
+.cap-tile--cta-dark {
+  grid-area: cta;
+  background: #b2cfe3;
+  color: var(--rc-navy);
+  min-height: 280px;
+  justify-content: space-between;
+}
+.cap-tile__cta-dark-title {
+  margin: 0.6rem 0 0;
+  font-size: clamp(1.2rem, 1.9vw, 1.6rem);
+  font-weight: 700;
+  line-height: 1.18;
+  letter-spacing: -0.015em;
+  color: var(--rc-navy);
+}
+.cap-tile--cta-dark .cap-tile__eyebrow--pink {
+  color: var(--rc-navy);
+  opacity: 1;
+  background: var(--rc-white);
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  display: inline-flex;
+  width: fit-content;
+}
+.cap-tile--cta-dark .cap-tile__pill-cta {
+  background: var(--rc-navy);
+  color: var(--rc-white);
+}
+.cap-tile--cta-dark .cap-tile__pill-arrow {
+  background: var(--rc-pink);
+  color: var(--rc-navy);
+}
+
+/* ==================================================
+   Responsive
+   ================================================== */
+@media (max-width: 1024px) {
+  .capabilities__grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "savings portrait"
+      "savings portrait"
+      "growth cta"
+      "possibilities possibilities";
+  }
+  .cap-tile--portrait { min-height: 500px; }
+  .cap-tile--possibilities { min-height: 240px; }
+}
+
+@media (max-width: 700px) {
+  .capabilities__grid {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "savings"
+      "portrait"
+      "growth"
+      "possibilities"
+      "cta";
+  }
+  .cap-tile--portrait {
+    min-height: 400px;
+    background-size: auto 75%;
+  }
+  .cap-tile--possibilities { grid-template-columns: 1fr; }
+  .cap-tile__poss-image { min-height: 180px; }
+  .cap-tile__hero-num { font-size: clamp(3rem, 15vw, 4rem); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .capabilities.js .cap-tile { opacity: 1; transform: none; }
+  .capabilities.js .cap-slider__fill { width: 65%; }
+  .capabilities.js .cap-slider__thumb { left: 65%; }
+  .capabilities.js .cap-chart__bar { transform: scaleY(1); }
+  .capabilities.js .cap-chart__badge { opacity: 1; transform: none; }
+  .capabilities *, .capabilities *::before, .capabilities *::after {
+    transition: none !important;
+  }
+}

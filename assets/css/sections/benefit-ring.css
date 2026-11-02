@@ -1,0 +1,168 @@
+/* Benefit ring section (#business-benefits): heading, then a full-width photo
+   with an arc of colourful benefit shapes in the empty space above the people
+   and a detail card under the arc. Loaded via @import in assets/css/main.css.
+   All styles are scoped to .rcf. */
+.rcf {
+  --navy: #16305b; --navy-light: #2a5a94; --ink: #0b1a33; --muted: #4e596b; --surface: #f8f9fb;
+  --blue: #4f86bd; --pink-deep: #c86a9b;
+  --size: clamp(70px, 6vw, 100px);
+  position: relative; padding-top: clamp(64px, 8vw, 104px);
+  font-family: "Montserrat", system-ui, -apple-system, "Segoe UI", sans-serif; color: var(--navy); background: var(--surface);
+}
+.rcf *, .rcf *::before, .rcf *::after { box-sizing: border-box; }
+
+/* ---------- Heading ---------- */
+/* Head styles match .capabilities / .rcc / .rcb / .rcq for cross-section consistency */
+.rcf-head {
+  max-width: 780px;
+  margin: 0 auto 40px;
+  padding: 0 24px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.rcf-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin: 0 0 1.25rem;
+  padding: 0.4rem 0.95rem 0.4rem 0.75rem;
+  background: var(--rc-pink-soft);
+  color: var(--rc-navy);
+  border: 0;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.rcf-eyebrow::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--rc-pink);
+  box-shadow: 0 0 0 2px rgba(246, 205, 225, 0.4);
+}
+.rcf-title {
+  margin: 0;
+  font-size: clamp(1.75rem, 3.4vw, 2.75rem);
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  color: var(--rc-navy);
+  text-wrap: balance;
+}
+.rcf-title span {
+  display: inline-block;
+  font-style: italic;
+  font-weight: 600;
+  color: var(--rc-navy);
+  background: none;
+  -webkit-background-clip: border-box;
+          background-clip: border-box;
+}
+.rcf-sub {
+  margin: 14px 0 0;
+  max-width: 620px;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--rc-muted);
+}
+
+/* ---------- Stage: photo + arc + card ---------- */
+.rcf-stage { position: relative; width: 100%; aspect-ratio: 1448 / 1086; max-height: 1000px; overflow: hidden; }
+.rcf-media { position: absolute; inset: 0; }
+.rcf-media img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: 50% 100%;
+  display: block;
+  transform: scale(1.05);
+  transition: transform 1.6s cubic-bezier(.2,.8,.2,1);
+  /* Soft fade at the top of the photo so it dissolves into the section background —
+     no visible horizontal band. */
+  -webkit-mask-image: linear-gradient(180deg,
+    rgba(0,0,0,0) 0%,
+    rgba(0,0,0,0.45) 18%,
+    rgba(0,0,0,0.85) 32%,
+    rgba(0,0,0,1) 48%);
+          mask-image: linear-gradient(180deg,
+    rgba(0,0,0,0) 0%,
+    rgba(0,0,0,0.45) 18%,
+    rgba(0,0,0,0.85) 32%,
+    rgba(0,0,0,1) 48%);
+}
+.rcf.is-in .rcf-media img { transform: scale(1); }
+
+/* Detail card, centred under the arc */
+.rcf-card {
+  position: absolute; z-index: 3; left: 50%; top: 22%; width: min(520px, 40%); transform: translate(-50%, 0);
+  padding: 22px 24px 26px; border-radius: 26px; background: rgba(255,255,255,.94);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 24px 50px -22px rgba(11,26,51,.45); display: grid; grid-template-columns: 60px minmax(0, 1fr); gap: 16px; align-items: start;
+}
+.rcf-card-icon { width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: var(--c-bg, var(--navy)); color: var(--c-fg, #fff); box-shadow: 0 0 0 3px #fff, 0 0 0 5px color-mix(in srgb, var(--c-bg, #16305b) 40%, transparent); transition: background .4s ease, color .4s ease; }
+.rcf-card-count { margin: 0; font-size: 12px; font-weight: 800; letter-spacing: .08em; color: var(--pink-deep); }
+.rcf-card-title { margin: 4px 0 0; font-size: 20px; font-weight: 800; line-height: 1.2; color: var(--ink); }
+.rcf-card-text { margin: 8px 0 0; font-size: 15px; line-height: 1.6; color: var(--muted); }
+.rcf-card-body.is-swap { animation: rcf-swap .45s cubic-bezier(.2,.8,.2,1); }
+.rcf-card-bar { position: absolute; left: 24px; right: 24px; bottom: 12px; height: 3px; border-radius: 3px; overflow: hidden; background: #eef1f5; }
+.rcf-card-bar span { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--blue), var(--pink-deep)); }
+.rcf.is-timing .rcf-card-bar span { animation: rcf-fill var(--rcf-duration, 4s) linear forwards; }
+.rcf.is-paused .rcf-card-bar span { animation-play-state: paused; }
+
+.rcf-more-wrap { padding: 28px 24px clamp(28px, 3vw, 40px); text-align: center; }
+.rcf-more { display: inline-flex; align-items: center; gap: 10px; min-height: 50px; padding: 0 8px 0 24px; border-radius: 999px; background: linear-gradient(90deg, var(--navy), var(--navy-light)); color: #fff; font-size: 15px; font-weight: 800; text-decoration: none; box-shadow: 0 12px 26px rgba(22,48,91,.2); transition: transform .2s ease; }
+.rcf-more:hover { transform: translateY(-2px); }
+.rcf-more i { width: 34px; height: 34px; border-radius: 50%; background: rgba(255,255,255,.2); display: inline-flex; align-items: center; justify-content: center; font-style: normal; }
+.rcf-more:focus-visible, .rcf-bubble:focus-visible { outline: 3px solid var(--navy); outline-offset: 4px; }
+
+/* ---------- Arc of shapes ---------- */
+.rcf-ring { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
+.rcf-item { position: absolute; left: var(--x); top: var(--y); transform: translate(-50%, -50%); pointer-events: auto; }
+.rcf-pop { opacity: 0; transform: scale(.3); }
+.rcf.is-in .rcf-pop { animation: rcf-pop .65s cubic-bezier(.34,1.56,.64,1) forwards; animation-delay: calc(var(--n) * 90ms + 300ms); }
+.rcf-bob { animation: rcf-bob 5s ease-in-out infinite; animation-delay: calc(var(--n) * -0.6s); }
+.rcf-bubble {
+  width: var(--size); height: var(--size); border-radius: 50%; border: 0; padding: 0; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; background: var(--bg); color: var(--fg);
+  box-shadow: 0 0 0 4px #fff, 0 16px 34px -10px rgba(11,26,51,.5);
+  transition: transform .45s cubic-bezier(.34,1.56,.64,1), box-shadow .35s ease;
+}
+.rcf-bubble svg { width: 44%; height: 44%; transition: transform .6s cubic-bezier(.34,1.56,.64,1); }
+.rcf-bubble.is-active { transform: scale(1.22); box-shadow: 0 0 0 5px #fff, 0 0 0 11px color-mix(in srgb, var(--bg) 55%, transparent), 0 22px 44px -12px rgba(11,26,51,.6); }
+.rcf-bubble.is-active svg { transform: rotate(-12deg) scale(1.08); }
+.rcf-bubble:hover:not(.is-active) { transform: scale(1.08); }
+.rcf-pill {
+  display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 999px; white-space: nowrap;
+  background: var(--bg); color: var(--fg); font-size: clamp(12px, 1vw, 15px); font-weight: 800;
+  box-shadow: 0 0 0 3px #fff, 0 12px 26px -10px rgba(11,26,51,.45); transform: rotate(var(--r, 0deg));
+}
+.rcf-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+@keyframes rcf-pop { to { opacity: 1; transform: scale(1); } }
+@keyframes rcf-bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
+@keyframes rcf-swap { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@keyframes rcf-fill { from { width: 0; } to { width: 100%; } }
+
+/* ---------- Tablet / mobile ---------- */
+@media (max-width: 1000px) {
+  .rcf { --size: 52px; }
+  .rcf-stage { max-height: none; aspect-ratio: auto; overflow: visible; }
+  .rcf-media { position: relative; inset: auto; aspect-ratio: 1448 / 1086; overflow: hidden; }
+  .rcf-ring { inset: 7vw 0 auto; display: flex; flex-wrap: nowrap; justify-content: center; gap: 9px; padding: 0 12px; }
+  .rcf-item { position: static; transform: none; }
+  .rcf-item--pill { display: none; }
+  .rcf-bubble.is-active { transform: scale(1.12); }
+  .rcf-card { position: relative; left: auto; top: auto; transform: none; width: auto; max-width: 620px; margin: -24px auto 0; z-index: 3; }
+}
+@media (max-width: 560px) {
+  .rcf-card { margin: -20px 16px 0; grid-template-columns: 48px minmax(0, 1fr); gap: 14px; padding: 20px 18px 24px; }
+  .rcf-card-icon { width: 48px; height: 48px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .rcf *, .rcf *::before, .rcf *::after { animation: none !important; transition: none !important; }
+  .rcf-pop { opacity: 1; transform: none; }
+  .rcf-media img { transform: none; }
+}

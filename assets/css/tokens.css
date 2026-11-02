@@ -1,0 +1,51 @@
+/*
+  Realtime Conveyancer brand tokens, matched to the official brand palette.
+*/
+:root {
+  /* Colours */
+  --rc-navy: #133459;          /* brand navy */
+  --rc-navy-light: #1f4a7a;
+  --rc-pink: #f6cde1;          /* brand pink (soft blush) */
+  --rc-pink-soft: #fde7f0;
+  --rc-blue: #7fb2d6;
+  --rc-blue-soft: #e4eff8;
+  --rc-green: #6cb33f;
+  --rc-green-soft: #e6f3dc;
+  --rc-ink: #133459;           /* main text */
+  --rc-muted: #5b6577;         /* secondary text */
+  --rc-surface: #f8f9fb;       /* near-white page background */
+  --rc-white: #ffffff;
+  --rc-border: #e6e9ef;
+
+  /* Gradients (same as the app buttons and cards) */
+  --rc-gradient-button: linear-gradient(90deg, var(--rc-navy) 0%, var(--rc-navy-light) 100%);
+  --rc-gradient-soft: linear-gradient(120deg, var(--rc-blue-soft) 0%, var(--rc-pink-soft) 100%);
+
+  /* Type */
+  --rc-font: "Montserrat", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --rc-text-sm: 0.875rem;
+  --rc-text-base: 1rem;
+  --rc-text-lg: 1.125rem;
+  --rc-text-xl: 1.5rem;
+  --rc-text-2xl: 2.25rem;
+  --rc-text-3xl: clamp(2.5rem, 5vw, 4rem);
+
+  /* Spacing */
+  --rc-space-1: 0.5rem;
+  --rc-space-2: 1rem;
+  --rc-space-3: 1.5rem;
+  --rc-space-4: 2rem;
+  --rc-space-6: 3rem;
+  --rc-space-8: 4rem;
+  --rc-section: clamp(4rem, 8vw, 7rem);   /* vertical padding per section */
+
+  /* Shape */
+  --rc-radius-sm: 12px;
+  --rc-radius-card: 20px;
+  --rc-radius-pill: 999px;
+  --rc-shadow-card: 0 2px 12px rgba(22, 48, 91, 0.06);
+  --rc-shadow-float: 0 12px 32px rgba(22, 48, 91, 0.14);
+
+  /* Layout */
+  --rc-container: 1200px;
+}

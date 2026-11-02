@@ -1,0 +1,518 @@
+/* Hero: full-bleed cinematic slideshow
+   - 4 slides, auto-advance, Ken Burns zoom + slow crossfade
+   - Line-mask reveal on headline (slides up from behind an invisible mask)
+   - Staggered entry: tag → bold line → italic line → lede → CTA
+   - Per-slide theming via CSS variables (dark navy / light cream)
+   - Brand palette only. Montserrat only. */
+
+.hero {
+  /* ---- Theme vars (default = dark) ---- */
+  --hero-text:       #ffffff;
+  --hero-accent:     var(--rc-pink);
+  --hero-lede:       rgba(255, 255, 255, 0.82);
+  --hero-tag-bg:     rgba(255, 255, 255, 0.12);
+  --hero-tag-border: rgba(255, 255, 255, 0.22);
+  --hero-cta-bg:     #ffffff;
+  --hero-cta-text:   var(--rc-navy);
+  --hero-cta-chip:   var(--rc-pink);
+  --hero-cta-chip-text: var(--rc-navy);
+  --hero-scrim:
+    linear-gradient(90deg,
+      rgba(10, 20, 40, 0.80) 0%,
+      rgba(10, 20, 40, 0.55) 32%,
+      rgba(10, 20, 40, 0.18) 60%,
+      rgba(10, 20, 40, 0.05) 100%),
+    linear-gradient(180deg,
+      rgba(10, 20, 40, 0.30) 0%,
+      transparent 20%,
+      transparent 70%,
+      rgba(10, 20, 40, 0.45) 100%);
+  --hero-dot-base:   rgba(255, 255, 255, 0.35);
+  --hero-dot-active: var(--rc-pink);
+  --hero-scroll:     rgba(255, 255, 255, 0.75);
+
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 640px;
+  max-height: 1100px;
+  overflow: hidden;
+  background: var(--rc-navy);
+  color: var(--hero-text);
+  isolation: isolate;
+  margin-top: -1px;
+}
+
+/* ---- Light theme (brand cream + navy text) ---- */
+.hero.is-theme-light {
+  --hero-text:       var(--rc-navy);
+  --hero-accent:     var(--rc-navy-light);
+  --hero-lede:       rgba(22, 48, 91, 0.72);
+  --hero-tag-bg:     rgba(255, 255, 255, 0.6);
+  --hero-tag-border: rgba(22, 48, 91, 0.15);
+  --hero-cta-bg:     var(--rc-navy);
+  --hero-cta-text:   #ffffff;
+  --hero-cta-chip:   var(--rc-pink);
+  --hero-cta-chip-text: var(--rc-navy);
+  --hero-scrim:
+    linear-gradient(90deg,
+      rgba(248, 240, 232, 0.85) 0%,
+      rgba(248, 240, 232, 0.55) 32%,
+      rgba(248, 240, 232, 0.15) 60%,
+      transparent 100%),
+    linear-gradient(180deg,
+      rgba(248, 240, 232, 0.1) 0%,
+      transparent 30%,
+      transparent 70%,
+      rgba(22, 48, 91, 0.15) 100%);
+  --hero-dot-base:   rgba(22, 48, 91, 0.3);
+  --hero-dot-active: var(--rc-pink);
+  --hero-scroll:     rgba(22, 48, 91, 0.65);
+}
+
+/* ---- Pink/brand theme (warm) ---- */
+.hero.is-theme-pink {
+  --hero-text:       #ffffff;
+  --hero-accent:     #ffe8f1;
+  --hero-lede:       rgba(255, 255, 255, 0.88);
+  --hero-tag-bg:     rgba(255, 255, 255, 0.18);
+  --hero-tag-border: rgba(255, 255, 255, 0.3);
+  --hero-cta-bg:     #ffffff;
+  --hero-cta-text:   var(--rc-navy);
+  --hero-cta-chip:   var(--rc-navy);
+  --hero-cta-chip-text: #ffffff;
+  --hero-scrim:
+    linear-gradient(90deg,
+      rgba(179, 76, 128, 0.75) 0%,
+      rgba(179, 76, 128, 0.45) 35%,
+      rgba(227, 161, 192, 0.15) 65%,
+      transparent 100%),
+    linear-gradient(180deg,
+      rgba(22, 48, 91, 0.25) 0%,
+      transparent 20%,
+      transparent 70%,
+      rgba(22, 48, 91, 0.35) 100%);
+}
+
+/* ---------- Image stage ---------- */
+.hero__stage {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: var(--rc-navy);
+}
+.hero__slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center 45%;
+  background-repeat: no-repeat;
+  background-color: var(--rc-navy);
+  opacity: 0;
+  /* Base matches the animation's END state so the fade-out continues in the
+     same direction as the Ken Burns (no counter-motion / glitch). */
+  transform: scale(1.0);
+  /* Small colour lift only — just enough to look polished, not washed out. */
+  filter: saturate(1.08);
+  transition:
+    opacity 2.2s cubic-bezier(.4, 0, .2, 1),
+    transform 2.2s cubic-bezier(.4, 0, .2, 1);
+  will-change: opacity, transform;
+}
+.hero__slide.is-active {
+  opacity: 1;
+  animation: hero-ken-burns 12s cubic-bezier(.33, 0, .67, 1) forwards;
+}
+@keyframes hero-ken-burns {
+  from { transform: scale(1.1); }
+  to   { transform: scale(1.0); }
+}
+
+/* ---- Branded gradient fallbacks (shown while real images aren't in /assets/images/hero/) ----
+   When you drop a real .jpg in that folder with the matching filename, the image overrides
+   the gradient automatically (background-image stack: gradient underneath, photo on top). */
+.hero__slide[data-slide="0"] {
+  background-image:
+    radial-gradient(1200px 800px at 70% 40%, rgba(127, 178, 214, 0.35), transparent 60%),
+    radial-gradient(900px 700px at 20% 80%, rgba(227, 161, 192, 0.3), transparent 60%),
+    linear-gradient(135deg, #0a1428 0%, var(--rc-navy) 50%, #2a5a94 100%);
+}
+.hero__slide[data-slide="1"] {
+  background-image:
+    radial-gradient(900px 700px at 70% 40%, rgba(227, 161, 192, 0.45), transparent 60%),
+    radial-gradient(1000px 800px at 20% 80%, rgba(255, 232, 215, 0.6), transparent 60%),
+    linear-gradient(135deg, #fff5ec 0%, #f7e3ec 50%, #e4eff8 100%);
+}
+.hero__slide[data-slide="2"] {
+  background-image:
+    radial-gradient(1000px 800px at 65% 35%, rgba(227, 161, 192, 0.4), transparent 60%),
+    radial-gradient(900px 700px at 25% 75%, rgba(127, 178, 214, 0.3), transparent 60%),
+    linear-gradient(135deg, var(--rc-navy) 0%, #1e3a6a 60%, #3b5f94 100%);
+}
+.hero__slide[data-slide="3"] {
+  background-image:
+    radial-gradient(1200px 900px at 70% 40%, rgba(255, 255, 255, 0.25), transparent 60%),
+    radial-gradient(800px 700px at 20% 80%, rgba(22, 48, 91, 0.5), transparent 60%),
+    linear-gradient(135deg, var(--rc-pink) 0%, #c9789b 50%, var(--rc-navy) 100%);
+  /* Subject sits near the top of this photo; anchor the image to the top so the fixed
+     header doesn't crop it. The default `center 45%` was clipping the father's face. */
+  background-position: center top;
+}
+
+/* ---------- Scrim (left-weighted for text contrast) ---------- */
+.hero__scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: var(--hero-scrim);
+  transition: background 1.1s ease;
+}
+
+/* ---------- Content column ---------- */
+.hero__inner {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+.hero__content {
+  max-width: 680px;
+  padding-block: clamp(2rem, 4vw, 4rem);
+}
+
+/* ---- Tag ---- */
+.hero__tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.45rem 1rem;
+  background: var(--hero-tag-bg);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--hero-tag-border);
+  border-radius: var(--rc-radius-pill);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--hero-text);
+  margin-bottom: 1.6rem;
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.7s ease, transform 0.7s cubic-bezier(.4, 0, .2, 1),
+              background 0.6s ease, border-color 0.6s ease, color 0.6s ease;
+}
+.hero__tag-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--rc-green);
+  box-shadow: 0 0 0 0 rgba(108, 179, 63, 0.7);
+  animation: hero-pulse 1.8s ease-out infinite;
+}
+@keyframes hero-pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(108, 179, 63, 0.55); }
+  70%  { box-shadow: 0 0 0 10px rgba(108, 179, 63, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(108, 179, 63, 0); }
+}
+
+/* ---- Headline (mask reveal) ---- */
+.hero__title {
+  font-size: clamp(2.1rem, 5.2vw, 4.4rem);
+  font-weight: 800;
+  line-height: 1.06;
+  letter-spacing: -0.025em;
+  color: var(--hero-text);
+  margin-bottom: 2rem;
+  text-wrap: balance;
+  transition: color 0.6s ease;
+}
+.hero__line {
+  display: block;
+  overflow: hidden;         /* this is the mask */
+  padding-bottom: 0.08em;   /* so descenders don't clip */
+}
+.hero__line--bold {
+  font-weight: 800;
+}
+.hero__line--italic {
+  font-style: italic;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: var(--hero-accent);
+  font-size: 0.95em;
+  transition: color 0.6s ease;
+}
+
+/* The reveal: text sits 110% below the mask, animates up to 0 */
+.hero__text {
+  display: inline-block;
+  transform: translateY(110%);
+  opacity: 0;
+  transition:
+    transform 0.9s cubic-bezier(.76, 0, .24, 1),
+    opacity 0.5s ease;
+  will-change: transform, opacity;
+}
+.hero__content.is-ready .hero__text {
+  transform: translateY(0);
+  opacity: 1;
+}
+/* Exiting state (slides UP and out, into the top of its mask) */
+.hero__content.is-leaving .hero__text {
+  transform: translateY(-110%);
+  opacity: 0;
+  transition:
+    transform 0.55s cubic-bezier(.6, 0, .9, .35),
+    opacity 0.35s ease;
+}
+.hero__content.is-leaving .hero__tag,
+.hero__content.is-leaving .hero__cta {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition:
+    opacity 0.3s ease,
+    transform 0.5s cubic-bezier(.6, 0, .9, .35);
+}
+
+/* Reset state (no transition): used by JS to snap elements to default
+   position between the exit and the next entry. */
+.hero__content.is-reset .hero__text,
+.hero__content.is-reset .hero__tag,
+.hero__content.is-reset .hero__cta {
+  transition: none !important;
+}
+
+/* ---- Lede ---- */
+.hero__lede {
+  font-size: clamp(0.9rem, 1vw, 1rem);
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--hero-lede);
+  max-width: 440px;
+  margin-bottom: 1.9rem;
+  overflow: hidden;
+  padding-bottom: 2px;
+  transition: color 0.6s ease;
+}
+
+/* ---- CTA ---- */
+.hero__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 0.6rem 0.5rem 1.5rem;
+  background: var(--hero-cta-bg);
+  color: var(--hero-cta-text);
+  border-radius: var(--rc-radius-pill);
+  font-size: 1rem;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    background 0.6s ease,
+    color 0.6s ease,
+    opacity 0.6s ease;
+  opacity: 0;
+  transform: translateY(14px);
+}
+.hero__content.is-ready .hero__cta {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.55s;
+}
+.hero__cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.3);
+}
+.hero__cta-chip {
+  width: 42px; height: 42px;
+  border-radius: 50%;
+  background: var(--hero-cta-chip);
+  color: var(--hero-cta-chip-text);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.35s cubic-bezier(.4, 0, .2, 1), background 0.6s ease, color 0.6s ease;
+}
+.hero__cta:hover .hero__cta-chip {
+  transform: translateX(4px) rotate(-8deg);
+}
+
+/* ---- Staggered entry timing (owned by is-ready state) ---- */
+.hero__content.is-ready .hero__tag {
+  opacity: 1;
+  transform: translateY(0);
+}
+.hero__content.is-ready .hero__line--bold   .hero__text { transition-delay: 0.15s; }
+.hero__content.is-ready .hero__line--italic .hero__text { transition-delay: 0.3s;  }
+.hero__content.is-ready .hero__lede         .hero__text { transition-delay: 0.5s;  }
+
+/* ---------- SCROLL hint, center-bottom ---------- */
+.hero__scroll {
+  position: absolute;
+  left: 50%;
+  bottom: 2.4rem;
+  transform: translateX(-50%);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.55rem;
+  color: var(--hero-scroll);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.6s ease, color 0.6s ease;
+}
+.hero__scroll-mouse {
+  width: 24px;
+  height: 38px;
+  border: 1.5px solid currentColor;
+  border-radius: 14px;
+  position: relative;
+  opacity: 0.85;
+}
+.hero__scroll-dot {
+  position: absolute;
+  top: 7px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 3px;
+  height: 7px;
+  border-radius: 2px;
+  background: currentColor;
+  animation: hero-scroll-dot 2.2s ease-in-out infinite;
+}
+@keyframes hero-scroll-dot {
+  0%   { transform: translate(-50%, 0); opacity: 1; }
+  60%  { transform: translate(-50%, 10px); opacity: 0.2; }
+  100% { transform: translate(-50%, 0); opacity: 0; }
+}
+.hero__scroll-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+}
+.hero.is-ready .hero__scroll { opacity: 1; }
+
+/* ---------- Progress bars, bottom center ---------- */
+.hero__nav {
+  position: absolute;
+  left: 50%;
+  bottom: 3rem;
+  transform: translateX(-50%);
+  z-index: 4;
+  display: flex;
+  gap: 0.6rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.hero__nav li { display: block; line-height: 0; }
+
+.hero__nav-bar {
+  position: relative;
+  display: block;
+  width: 52px;
+  height: 22px;              /* big hit area */
+  padding: 0;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  overflow: visible;
+}
+/* Track line */
+.hero__nav-bar::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 3px;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 999px;
+  transition: background 0.4s ease, height 0.3s ease;
+}
+.hero__nav-bar:hover::before {
+  background: rgba(255, 255, 255, 0.65);
+  height: 4px;
+}
+.hero__nav-bar:focus-visible {
+  outline: 0;
+}
+.hero__nav-bar:focus-visible::before {
+  background: var(--rc-white);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3);
+}
+
+/* Fill (progress inside track) */
+.hero__nav-fill {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--rc-pink) 0%, rgba(255, 255, 255, 1) 100%);
+  border-radius: 999px;
+  transform: translateY(-50%) scaleX(0);
+  transform-origin: left center;
+  pointer-events: none;
+}
+
+/* Past (already shown) — track is fully bright */
+.hero__nav li.is-past .hero__nav-bar::before {
+  background: rgba(255, 255, 255, 0.85);
+}
+
+/* Active — fill animates left to right over the auto-advance window */
+.hero__nav li.is-active .hero__nav-bar::before {
+  background: rgba(255, 255, 255, 0.3);
+}
+.hero__nav li.is-active .hero__nav-fill {
+  animation: hero-nav-fill 7s linear forwards;
+  box-shadow: 0 0 12px rgba(227, 161, 192, 0.55);
+}
+@keyframes hero-nav-fill {
+  from { transform: translateY(-50%) scaleX(0); }
+  to   { transform: translateY(-50%) scaleX(1); }
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 720px) {
+  .hero { height: 92vh; min-height: 560px; }
+  .hero {
+    --hero-scrim:
+      linear-gradient(180deg,
+        rgba(10, 20, 40, 0.35) 0%,
+        rgba(10, 20, 40, 0.55) 50%,
+        rgba(10, 20, 40, 0.85) 100%);
+  }
+  .hero.is-theme-light {
+    --hero-scrim:
+      linear-gradient(180deg,
+        rgba(248, 240, 232, 0.35) 0%,
+        rgba(248, 240, 232, 0.65) 55%,
+        rgba(248, 240, 232, 0.9) 100%);
+  }
+  .hero__inner { align-items: flex-end; padding-bottom: 6rem; }
+  .hero__content { padding-block: 0; }
+  .hero__title { font-size: clamp(2.4rem, 10vw, 3.6rem); }
+  .hero__lede { font-size: 0.95rem; }
+  .hero__cta { padding-left: 1.2rem; }
+  .hero__cta-chip { width: 36px; height: 36px; }
+  .hero__nav { bottom: 2.2rem; gap: 0.4rem; }
+  .hero__nav-bar { width: 40px; }
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .hero__slide { transition: opacity 0.3s ease; transform: none; }
+  .hero__slide.is-active { transform: none; animation: none; }
+  .hero__text { transform: none; opacity: 1; transition: none; }
+  .hero__content.is-leaving .hero__text { opacity: 0; }
+  .hero__tag, .hero__cta, .hero__scroll, .hero__nav { opacity: 1; transform: none; }
+  .hero__scroll-dot, .hero__tag-dot { animation: none; }
+  .hero__nav li.is-active .hero__nav-fill { animation: none; transform: translateY(-50%) scaleX(1); }
+}

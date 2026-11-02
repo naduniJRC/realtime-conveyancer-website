@@ -1,0 +1,16 @@
+.DS_Store
+Thumbs.db
+.vscode/
+*.log
+
+# Node / npm
+node_modules/
+npm-debug.log*
+
+# Vercel
+.vercel/
+
+# Env files
+.env
+.env.local
+.env.*.local

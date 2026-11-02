@@ -1,0 +1,157 @@
+/* Testimonials carousel (#testimonials). Loaded via @import in assets/css/main.css.
+   All styles are scoped to .rct. */
+.rct {
+  --navy: #16305b; --navy-light: #2a5a94; --ink: #0b1a33; --muted: #4e596b; --border: #e1e6ee; --surface: #f8f9fb;
+  --blue: #4f86bd; --blue-soft: #e4eff8; --pink: #c86a9b; --pink-soft: #f7e3ec; --green: #5ea535; --green-soft: #e6f3dc;
+  --card-w: min(760px, 88vw);
+  position: relative; overflow: hidden; padding: clamp(16px, 2vw, 28px) 0 clamp(72px, 9vw, 120px);
+  font-family: "Montserrat", system-ui, -apple-system, "Segoe UI", sans-serif; color: var(--navy);
+  background:
+    radial-gradient(ellipse 40% 50% at 10% 30%, rgba(156,200,232,.28), transparent 70%),
+    radial-gradient(ellipse 40% 50% at 90% 70%, rgba(227,161,192,.26), transparent 70%),
+    var(--surface);
+}
+.rct *, .rct *::before, .rct *::after { box-sizing: border-box; }
+/* Head styles match .capabilities / .rcc / .rcb / .rcf for cross-section consistency */
+.rct-head {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0 24px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.rct-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin: 0 0 1.25rem;
+  padding: 0.4rem 0.95rem 0.4rem 0.75rem;
+  background: var(--rc-pink-soft);
+  color: var(--rc-navy);
+  border: 0;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.rct-eyebrow::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--rc-pink);
+  box-shadow: 0 0 0 2px rgba(246, 205, 225, 0.4);
+}
+.rct-title {
+  margin: 0;
+  font-size: clamp(1.75rem, 3.4vw, 2.75rem);
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  color: var(--rc-navy);
+  text-wrap: balance;
+}
+.rct-title span {
+  display: inline-block;
+  font-style: italic;
+  font-weight: 600;
+  color: var(--rc-navy);
+  background: none;
+  -webkit-background-clip: border-box;
+          background-clip: border-box;
+}
+.rct-sub {
+  margin: 16px 0 0;
+  max-width: 620px;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--rc-muted);
+}
+
+/* ---------- Stage ---------- */
+.rct-stage { position: relative; margin-top: 56px; perspective: 1600px; touch-action: pan-y; user-select: none; }
+.rct-track { position: relative; height: var(--track-h, 460px); transition: height .5s cubic-bezier(.2,.8,.2,1); }
+.rct-card {
+  --accent: var(--blue); --accent-soft: var(--blue-soft);
+  position: absolute; top: 0; left: 50%; width: var(--card-w); margin-left: calc(var(--card-w) / -2);
+  padding: 44px 48px 36px; border-radius: 34px; background: #fff; border: 1px solid #edf0f5;
+  box-shadow: 0 30px 60px -30px rgba(22,48,91,.35), 0 2px 8px rgba(22,48,91,.04);
+  transform-style: preserve-3d; transition: transform .8s cubic-bezier(.2,.8,.2,1), opacity .6s ease, filter .6s ease;
+  opacity: 0; pointer-events: none;
+}
+.rct-card:nth-child(3n+2) { --accent: var(--pink); --accent-soft: var(--pink-soft); }
+.rct-card:nth-child(3n+3) { --accent: var(--green); --accent-soft: var(--green-soft); }
+.rct-card[data-pos="0"]  { transform: translateX(0) scale(1); opacity: 1; z-index: 3; pointer-events: auto; }
+.rct-card[data-pos="-1"] { transform: translateX(-64%) scale(.82) rotateY(12deg); opacity: .5; z-index: 2; filter: saturate(.6); pointer-events: auto; cursor: pointer; }
+.rct-card[data-pos="1"]  { transform: translateX(64%) scale(.82) rotateY(-12deg); opacity: .5; z-index: 2; filter: saturate(.6); pointer-events: auto; cursor: pointer; }
+.rct-card[data-pos="-2"] { transform: translateX(-110%) scale(.7) rotateY(16deg); opacity: 0; z-index: 1; }
+.rct-card[data-pos="2"]  { transform: translateX(110%) scale(.7) rotateY(-16deg); opacity: 0; z-index: 1; }
+.rct-card[data-pos="far"] { transform: translateX(0) scale(.6); opacity: 0; z-index: 0; }
+.rct-card[data-pos="-1"]:hover, .rct-card[data-pos="1"]:hover { opacity: .75; }
+
+.rct-mark { position: absolute; top: -26px; left: 40px; width: 64px; height: 64px; border-radius: 20px; background: var(--accent); color: #fff; display: flex; align-items: center; justify-content: center; box-shadow: 0 14px 28px -10px color-mix(in srgb, var(--accent) 70%, transparent); transform: rotate(-8deg); transition: transform .6s cubic-bezier(.34,1.56,.64,1); }
+.rct-card[data-pos="0"] .rct-mark { transform: rotate(0deg) scale(1.05); }
+.rct-practice { display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 999px; background: var(--accent-soft); font-size: 12px; font-weight: 800; color: var(--navy); }
+.rct-practice::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); }
+.rct-quote { margin: 18px 0 0; font-size: clamp(18px, 1.8vw, 23px); line-height: 1.55; font-weight: 600; color: var(--ink); letter-spacing: -0.005em; }
+.rct-quote p { margin: 0; }
+.rct-w { display: inline-block; opacity: .15; transform: translateY(6px); filter: blur(2px); transition: opacity .5s ease, transform .5s ease, filter .5s ease; transition-delay: calc(var(--i) * 18ms); }
+.rct-card.is-revealed .rct-w { opacity: 1; transform: none; filter: none; }
+
+.rct-foot { margin-top: 28px; padding-top: 22px; border-top: 1px solid #eef1f5; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; }
+.rct-person { display: flex; align-items: center; gap: 14px; }
+.rct-avatar { position: relative; flex: 0 0 60px; width: 60px; height: 60px; border-radius: 50%; overflow: hidden; background: var(--accent-soft); color: var(--navy); font-weight: 800; font-size: 18px; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 0 3px #fff, 0 0 0 5px var(--accent); }
+.rct-avatar img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.rct-name { margin: 0; font-size: 16px; font-weight: 800; color: var(--navy); }
+.rct-role { margin: 2px 0 0; font-size: 14px; color: var(--muted); }
+.rct-action { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 18px 0 8px; border-radius: 999px; border: 1.5px solid var(--border); background: #fff; color: var(--navy); font-family: inherit; font-size: 14px; font-weight: 800; text-decoration: none; cursor: pointer; transition: border-color .2s ease, transform .2s ease; }
+.rct-action:hover { border-color: var(--accent); transform: translateY(-1px); }
+.rct-action-icon { width: 30px; height: 30px; border-radius: 50%; background: var(--accent); color: #fff; display: inline-flex; align-items: center; justify-content: center; }
+
+/* ---------- Controls ---------- */
+.rct-controls { margin-top: 40px; display: flex; align-items: center; justify-content: center; gap: 18px; padding: 0 16px; }
+.rct-arrow { flex: 0 0 auto; width: 52px; height: 52px; border-radius: 50%; border: 1.5px solid var(--border); background: #fff; color: var(--navy); display: inline-flex; align-items: center; justify-content: center; cursor: pointer; transition: background .2s ease, color .2s ease, border-color .2s ease; }
+.rct-arrow:hover { background: var(--navy); color: #fff; border-color: var(--navy); }
+.rct-faces { display: flex; align-items: center; gap: 10px; overflow-x: auto; padding: 12px 14px; scrollbar-width: none; }
+.rct-faces::-webkit-scrollbar { display: none; }
+.rct-face { position: relative; flex: 0 0 auto; width: 48px; height: 48px; padding: 0; border: 0; border-radius: 50%; overflow: hidden; cursor: pointer; background: #dde6f0; color: var(--navy); font-family: inherit; font-weight: 800; font-size: 14px; opacity: .55; filter: grayscale(.6); transform: scale(.9); transition: transform .4s cubic-bezier(.34,1.56,.64,1), opacity .3s ease, filter .3s ease, box-shadow .3s ease; }
+.rct-face img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.rct-face:hover { opacity: .9; filter: none; }
+.rct-face[aria-current="true"] { opacity: 1; filter: none; transform: scale(1.15); box-shadow: 0 0 0 3px #fff, 0 0 0 5px var(--navy); }
+.rct-progress { max-width: 260px; height: 3px; margin: 14px auto 0; border-radius: 3px; background: #e6eaf0; overflow: hidden; }
+.rct-progress span { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--blue), var(--pink)); }
+.rct.is-timing .rct-progress span { animation: rct-fill var(--rct-duration, 7s) linear forwards; }
+.rct.is-paused .rct-progress span { animation-play-state: paused; }
+.rct-arrow:focus-visible, .rct-face:focus-visible, .rct-action:focus-visible, .rct-dialog button:focus-visible { outline: 3px solid var(--pink); outline-offset: 3px; }
+
+/* ---------- Full review dialog ---------- */
+.rct-dialog { width: min(720px, 92vw); max-height: 86vh; padding: 0; border: 0; border-radius: 28px; box-shadow: 0 40px 80px -20px rgba(11,26,51,.45); font-family: "Montserrat", system-ui, sans-serif; color: var(--navy, #16305b); }
+.rct-dialog::backdrop { background: rgba(11,26,51,.45); backdrop-filter: blur(4px); }
+.rct-dialog[open] { animation: rct-dialog-in .4s cubic-bezier(.2,.8,.2,1); }
+.rct-dialog-inner { padding: 40px; }
+.rct-dialog-close { position: absolute; top: 16px; right: 16px; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #f1f4f8; color: #16305b; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+.rct-dialog-quote { margin: 0; font-size: 17px; line-height: 1.75; color: #0b1a33; }
+.rct-dialog-name { margin: 24px 0 0; font-weight: 800; }
+.rct-dialog-role { margin: 2px 0 0; color: #4e596b; }
+
+.rct-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+@keyframes rct-fill { from { width: 0; } to { width: 100%; } }
+@keyframes rct-dialog-in { from { opacity: 0; transform: translateY(20px) scale(.97); } to { opacity: 1; transform: none; } }
+
+@media (max-width: 760px) {
+  .rct-card { padding: 40px 24px 28px; border-radius: 28px; }
+  .rct-card[data-pos="-1"] { transform: translateX(-92%) scale(.86); opacity: .35; }
+  .rct-card[data-pos="1"]  { transform: translateX(92%) scale(.86); opacity: .35; }
+  .rct-mark { left: 24px; width: 54px; height: 54px; }
+  .rct-arrow { display: none; }
+  .rct-foot { flex-direction: column; align-items: flex-start; }
+  .rct-dialog-inner { padding: 32px 22px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .rct *, .rct *::before, .rct *::after { transition: none !important; animation: none !important; }
+  .rct-w { opacity: 1; transform: none; filter: none; }
+}
