@@ -136,6 +136,8 @@
     radial-gradient(1200px 800px at 70% 40%, rgba(127, 178, 214, 0.35), transparent 60%),
     radial-gradient(900px 700px at 20% 80%, rgba(227, 161, 192, 0.3), transparent 60%),
     linear-gradient(135deg, #0a1428 0%, var(--rc-navy) 50%, #2a5a94 100%);
+  /* Slide 0 reads a touch darker than the others — give it an extra lift */
+  filter: brightness(1.08) saturate(1.12);
 }
 .hero__slide[data-slide="1"] {
   background-image:

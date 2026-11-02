@@ -1,4 +1,5 @@
-/* Connected section (#connected). Loaded via @import in assets/css/main.css */
+/* Connected section (#connected), stacked bands layout. */
+
 /* ===================================================================
    CONNECTED SECTION (Concept A · angled panels)
    To use in the project: move the CSS to assets/css/sections/connected.css,
@@ -35,22 +36,10 @@
     radial-gradient(ellipse 45% 40% at 88% 40%, rgba(227,161,192,.22), rgba(227,161,192,0) 70%),
     var(--rc-surface);
 }
-/* Subtle dot-grid wash: fades out behind the devices, visible toward the edges. */
-.rcc::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  background-image: radial-gradient(circle, rgba(19, 52, 89, 0.14) 1px, transparent 1.5px);
-  background-size: 26px 26px;
-  -webkit-mask-image: radial-gradient(ellipse 70% 55% at 50% 55%, transparent 0%, rgba(0,0,0,0.9) 80%);
-          mask-image: radial-gradient(ellipse 70% 55% at 50% 55%, transparent 0%, rgba(0,0,0,0.9) 80%);
-}
 .rcc *, .rcc *::before, .rcc *::after { box-sizing: border-box; }
-.rcc-container { position: relative; z-index: 1; max-width: 1160px; margin: 0 auto; }
+.rcc-container { max-width: 1160px; margin: 0 auto; }
 
-/* ---------- Heading (matches .capabilities header for consistency) ---------- */
+/* ---------- Heading (matches .capabilities / .rcb / .rcf etc.) ---------- */
 .rcc-head { max-width: 980px; margin: 0 auto; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 1rem; }
 .rcc-eyebrow {
   display: inline-flex;
@@ -60,13 +49,15 @@
   padding: 0.4rem 0.95rem 0.4rem 0.75rem;
   background: var(--rc-pink-soft);
   color: var(--rc-navy);
+  border: 0;
   border-radius: 999px;
   font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
-.rcc-live-dot {
+.rcc-eyebrow::before {
+  content: "";
   width: 7px;
   height: 7px;
   border-radius: 50%;
@@ -245,6 +236,12 @@
 /* ---------- Below the panels: features + links ---------- */
 .rcc-below { margin-top: 36px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; }
 .rcc-below-col { display: flex; flex-direction: column; gap: 18px; padding: 0 36px; }
+.rcc-chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.rcc-chips li {
+  display: inline-flex; align-items: center; gap: 8px; padding: 8px 13px; border-radius: 999px;
+  background: #fff; border: 1px solid var(--rc-border); font-size: 13px; font-weight: 600; color: var(--rc-navy);
+}
+.rcc-chips svg { flex: 0 0 auto; }
 .rcc-link {
   align-self: flex-start; display: inline-flex; align-items: center; gap: 10px; min-height: 52px; padding: 0 10px 0 24px;
   border-radius: 999px; font-size: 15px; font-weight: 800; text-decoration: none; color: #fff;
@@ -257,8 +254,8 @@
 .rcc-link--team { background: linear-gradient(90deg, var(--rc-navy), var(--rc-navy-light)); box-shadow: 0 12px 26px rgba(22,48,91,.25); }
 .rcc-link--client { background: linear-gradient(90deg, #9b3d6e, #c86a9b); box-shadow: 0 12px 26px rgba(155,61,110,.25); }
 
-/* ---------- Device strip (sits inside .rcc-head) ---------- */
-.rcc-devices { margin: 6px 0 0; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 10px; }
+/* ---------- Device strip ---------- */
+.rcc-devices { margin: 48px 0 0; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 10px; }
 .rcc-device { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 999px; font-size: 14px; font-weight: 700; }
 .rcc-device--laptop { background: var(--rc-blue-soft); color: var(--rc-blue-deep); }
 .rcc-device--tablet { background: var(--rc-green-soft); color: var(--rc-green-deep); }
@@ -268,6 +265,7 @@
 .rcc-sr { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 
 /* ---------- Animations ---------- */
+@keyframes rcc-pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(108,179,63,.6); } 50% { box-shadow: 0 0 0 6px rgba(108,179,63,0); } }
 @keyframes rcc-toast-in { from { transform: translateY(-140%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 @keyframes rcc-pop { from { transform: scale(.92); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 @keyframes rcc-rise { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: none; } }
@@ -320,3 +318,76 @@
   .rcc.js .rcc-reveal { opacity: 1; }
   .rcc-toast { opacity: 1; transform: none; }
 }
+
+/* =================================================================
+   STACKED LAYOUT: two slanted bands, one product per band
+   (overrides the side-by-side layout above)
+   ================================================================= */
+.rcc--stacked { padding-top: clamp(56px, 7vw, 88px); padding-bottom: clamp(56px, 7vw, 88px); }
+
+.rcc-bands { position: relative; margin-top: 24px; }
+.rcc-band { position: relative; height: 350px; }
+.rcc-band .rcc-app { min-height: 290px; }
+.rcc-band--team { margin-top: 48px; }          /* room for the laptop to pop out */
+.rcc-band--client { margin-top: 32px; }        /* small breathing gap below band 1 */
+/* Each band is a rounded shape with ONE slanted edge (like the reference):
+   band 1 has a flat top and a slanted bottom, band 2 a slanted top and a flat bottom.
+   The outer element clips the flat side; the inner fill is skewed for the slanted side. */
+.rcc-band-shape { position: absolute; left: 0; right: 0; overflow: hidden; pointer-events: none; }
+.rcc-band--team .rcc-band-shape { top: 0; bottom: -60px; border-radius: 44px 44px 0 0; }
+.rcc-band--client .rcc-band-shape { top: -60px; bottom: 0; border-radius: 0 0 44px 44px; }
+.rcc-band-fill { position: absolute; left: 0; right: 0; border-radius: 44px; overflow: hidden; transform: skewY(2.5deg); transform-origin: center; box-shadow: inset 0 0 0 1.5px rgba(255,255,255,.7); }
+.rcc-band--team .rcc-band-fill { top: -120px; bottom: 60px;
+  background: radial-gradient(ellipse 50% 80% at 100% 30%, rgba(255,255,255,.55), transparent 70%), linear-gradient(110deg, #d3e6f5 0%, #a9cdea 55%, #7fb2d6 100%); }
+.rcc-band--client .rcc-band-fill { top: 60px; bottom: -120px;
+  background: radial-gradient(ellipse 50% 80% at 0% 70%, rgba(255,255,255,.55), transparent 70%), linear-gradient(250deg, #f8dde9 0%, #efbad2 55%, #e09bbd 100%); }
+.rcc-band--team .rcc-band-shape::after, .rcc-band--client .rcc-band-shape::after { content: none; }
+.rcc-band { filter: drop-shadow(0 24px 30px rgba(22,48,91,.14)); }
+.rcc-band-fill .rcc-grid { -webkit-mask-image: linear-gradient(90deg, rgba(0,0,0,.8), transparent 70%); mask-image: linear-gradient(90deg, rgba(0,0,0,.8), transparent 70%); }
+.rcc-band--client .rcc-band-fill .rcc-grid { -webkit-mask-image: linear-gradient(270deg, rgba(0,0,0,.8), transparent 70%); mask-image: linear-gradient(270deg, rgba(0,0,0,.8), transparent 70%); }
+.rcc-band-fill .rcc-ring--lg { width: 460px; height: 460px; }
+.rcc-band--team .rcc-band-fill .rcc-ring--lg { left: auto; right: -160px; bottom: -160px; }
+.rcc-band--team .rcc-band-fill .rcc-ring--sm { left: auto; right: -60px; bottom: -60px; }
+.rcc-band--client .rcc-band-fill .rcc-ring--lg { right: auto; left: -160px; bottom: -100px; }
+.rcc-band--client .rcc-band-fill .rcc-ring--sm { right: auto; left: -60px; bottom: 0; }
+
+.rcc-band-copy { position: absolute; z-index: 3; top: 50%; transform: translateY(-50%); width: min(500px, 48%); }
+.rcc-band--team .rcc-band-copy { left: 56px; top: 44px; transform: none; }
+.rcc-band--client .rcc-band-copy { right: 56px; }
+.rcc-band-copy .rcc-label-title { font-size: clamp(22px, 2.3vw, 30px); }
+.rcc-band-copy .rcc-label-text { max-width: 440px; }
+.rcc-band-copy .rcc-chips { margin-top: 14px; gap: 6px; }
+.rcc-band-copy .rcc-chips { flex-wrap: nowrap; }
+.rcc-band-copy .rcc-chips li { white-space: nowrap; padding: 5px 10px; font-size: 11.5px; background: rgba(255,255,255,.85); border-color: rgba(255,255,255,.9); }
+.rcc-band-copy .rcc-link { margin-top: 16px; min-height: 44px; font-size: 14px; }
+
+/* Devices popping out of the bands */
+.rcc-band .rcc-laptop { left: auto; right: 6%; top: -40px; width: min(480px, 42%); scale: .84; transform-origin: right top; }
+.rcc-band .rcc-phone { right: auto; left: 6%; top: auto; bottom: 18px; width: 300px; transform-origin: left bottom; scale: .66; }
+.rcc-band .rcc-phone-glow { inset: -6% -20%; }
+.rcc-band--client { z-index: 2; }
+.rcc-band--team { z-index: 1; }
+
+.rcc--stacked .rcc-devices { display: none; } /* "Works on any device" is now a chip in band 1 */
+
+@media (max-width: 1100px) {
+  .rcc-band-copy { width: min(440px, 46%); }
+  .rcc-band-copy .rcc-chips { display: none; }
+}
+@media (max-width: 860px) {
+  .rcc-band, .rcc-band--team { height: auto; margin-top: 0; padding: 32px 22px 36px; display: flex; flex-direction: column; gap: 26px; }
+  .rcc-band--team { margin-top: 24px; }
+  .rcc-band--client { margin-top: 0; }
+  .rcc-band--team .rcc-band-shape, .rcc-band--client .rcc-band-shape { top: 0; bottom: 0; border-radius: 32px; }
+  .rcc-band--team .rcc-band-fill, .rcc-band--client .rcc-band-fill { top: 0; bottom: 0; transform: none; border-radius: 32px; }
+  .rcc-band-copy, .rcc-band--team .rcc-band-copy { position: relative; top: auto; left: auto !important; right: auto !important; transform: none; width: auto; }
+  .rcc-band--team { height: auto; }
+  .rcc-band-copy .rcc-chips { display: flex; flex-wrap: wrap; }
+  .rcc-band .rcc-laptop { position: relative; right: auto; top: auto; width: 100%; scale: 1; order: -1; }
+  .rcc-band .rcc-phone { position: relative; left: auto; bottom: auto; scale: .72; transform-origin: center top; align-self: center; margin-bottom: -170px; order: -1; }
+}
+
+.rcc-band-copy .rcc-label-eyebrow { margin: 0; font-size: 12px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+.rcc-band-copy .rcc-label-title { margin: 6px 0 0; line-height: 1.12; font-weight: 800; color: var(--rc-ink-deep); }
+.rcc-band-copy .rcc-label-text { margin: 8px 0 0; font-size: 15px; line-height: 1.55; color: var(--rc-navy); }
+.rcc-title span { display: inline; }
