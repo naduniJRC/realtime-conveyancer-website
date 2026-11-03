@@ -6,6 +6,7 @@
 @import url("layout/header.css");
 @import url("layout/footer.css");
 @import url("sections/hero.css");
+@import url("sections/platform-glance.css");
 @import url("sections/marquee.css");
 @import url("sections/proof.css");
 @import url("sections/connected.css");

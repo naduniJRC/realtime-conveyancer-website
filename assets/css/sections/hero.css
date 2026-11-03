@@ -156,6 +156,9 @@
     radial-gradient(1200px 900px at 70% 40%, rgba(255, 255, 255, 0.25), transparent 60%),
     radial-gradient(800px 700px at 20% 80%, rgba(22, 48, 91, 0.5), transparent 60%),
     linear-gradient(135deg, var(--rc-pink) 0%, #c9789b 50%, var(--rc-navy) 100%);
+  /* Subject's face sits near the top of this photo; anchor the crop higher
+     so the fixed header doesn't hide it. */
+  background-position: center 20%;
 }
 
 /* ---------- Scrim (left-weighted for text contrast) ---------- */

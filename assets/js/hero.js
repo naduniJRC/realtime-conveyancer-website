@@ -28,38 +28,38 @@
          Theme kept dark on every slide — same left-side scrim across all 4 images. */
   const SLIDES = [
     {
-      // "Australian Conveyancer Reviewing Property Plans-1" — focused, in control
+      // "Smiling Australian Conveyancer in Sunlit Office-1" — focused, in control
       theme: "",
-      head:  "Conveyancing,",
-      italic:"in real time.",
-      lede:  "Paperless matters, automated workflows and clients always in the loop. All on one platform, built by conveyancers for conveyancers.",
+      head:  "A clearer view",
+      italic:"of every matter.",
+      lede:  "Keep your matters organised and progress easy to follow — so you can see what needs attention and move through your day with confidence.",
       cta:   "Book a demo",
       href:  "/book-a-demo/"
     },
     {
-      // "Australian conveyancing team planning together-2" — team collaboration
+      // "Sunlit conveyancing teamwork at the oak table-2" — team collaboration
       theme: "",
-      head:  "Your whole team,",
-      italic:"on the same page.",
-      lede:  "One shared matter view. Live updates. Automation that cuts 8 hours of busywork down to 4.5 per matter.",
-      cta:   "Explore the platform",
-      href:  "/tms/"
-    },
-    {
-      // "Confident mobile conveyancing on the terrace-3" — work from anywhere
-      theme: "",
-      head:  "Settle from",
-      italic:"anywhere you work.",
-      lede:  "Laptop, tablet or phone. From the office, from home, from the road — the same live matter, in sync.",
+      head:  "Less admin.",
+      italic:"More time for your expertise.",
+      lede:  "Automate repetitive tasks and reduce re-work, giving your team more time to focus on the conveyancing work that needs their knowledge and care.",
       cta:   "Book a demo",
       href:  "/book-a-demo/"
     },
     {
-      // "Personal property title plan consultation-4" — client consultation
+      // "Australian conveyancing settlement review-3" — financial detail / trust
       theme: "",
-      head:  "Every client,",
-      italic:"confidently in the loop.",
-      lede:  "The Pathway to Settlement app shows clients, agents and brokers exactly where they are — before they think to call.",
+      head:  "Confidence in",
+      italic:"the details that count.",
+      lede:  "Bring trust accounting and settlement financial processes into your conveyancing workflow — helping your team manage the details with greater clarity.",
+      cta:   "Book a demo",
+      href:  "/book-a-demo/"
+    },
+    {
+      // "Australian Conveyancer Taking a Coastal Call-4" — mobile / connected
+      theme: "",
+      head:  "Everyone connected,",
+      italic:"wherever you work.",
+      lede:  "Keep clients informed with live progress updates through Pathway to Settlement, and access Realtime on your mobile, tablet or laptop.",
       cta:   "Book a demo",
       href:  "/book-a-demo/"
     }
