@@ -18,9 +18,10 @@
   position: relative;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 1.5rem;
-  width: max-content;
-  max-width: calc(100% - 1.6rem);
+  width: 100%;
+  max-width: calc(var(--rc-container) - 2 * var(--rc-space-3));
   margin: 0 auto;
   min-height: 56px;
   padding: 0.4rem 0.5rem 0.4rem 1.4rem;
