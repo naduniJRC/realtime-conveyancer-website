@@ -120,8 +120,9 @@
     transform 0.3s ease,
     box-shadow 0.3s ease;
 }
-.rcb-card--2 { --c: var(--pink); --soft: var(--pink-soft); --mid: var(--pink-mid); }
-.rcb-card--3 { --c: var(--green); --soft: var(--green-soft); --mid: var(--green-mid); }
+/* All three cards share the navy family — gentle shade variation only */
+.rcb-card--2 { --c: #2a5a94; --soft: var(--blue-soft); --mid: #9cc8e8; }
+.rcb-card--3 { --c: var(--navy); --soft: var(--blue-soft); --mid: #9cc8e8; }
 .rcb-card.rcb-on {
   flex: 1 1 0;
   box-shadow:

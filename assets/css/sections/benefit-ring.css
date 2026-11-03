@@ -121,23 +121,63 @@
 /* ---------- Arc of shapes ---------- */
 .rcf-ring { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
 .rcf-item { position: absolute; left: var(--x); top: var(--y); transform: translate(-50%, -50%); pointer-events: auto; }
-.rcf-pop { opacity: 0; transform: scale(.3); }
-.rcf.is-in .rcf-pop { animation: rcf-pop .65s cubic-bezier(.34,1.56,.64,1) forwards; animation-delay: calc(var(--n) * 90ms + 300ms); }
-.rcf-bob { animation: rcf-bob 5s ease-in-out infinite; animation-delay: calc(var(--n) * -0.6s); }
-.rcf-bubble {
-  width: var(--size); height: var(--size); border-radius: 50%; border: 0; padding: 0; cursor: pointer;
-  display: flex; align-items: center; justify-content: center; background: var(--bg); color: var(--fg);
-  box-shadow: 0 0 0 4px #fff, 0 16px 34px -10px rgba(11,26,51,.5);
-  transition: transform .45s cubic-bezier(.34,1.56,.64,1), box-shadow .35s ease;
+/* Calm fade-in instead of spring pop. No bobbing. */
+.rcf-pop { opacity: 0; transform: translateY(6px); }
+.rcf.is-in .rcf-pop {
+  animation: rcf-fade .7s cubic-bezier(.2,.8,.2,1) forwards;
+  animation-delay: calc(var(--n) * 70ms + 250ms);
 }
-.rcf-bubble svg { width: 44%; height: 44%; transition: transform .6s cubic-bezier(.34,1.56,.64,1); }
-.rcf-bubble.is-active { transform: scale(1.22); box-shadow: 0 0 0 5px #fff, 0 0 0 11px color-mix(in srgb, var(--bg) 55%, transparent), 0 22px 44px -12px rgba(11,26,51,.6); }
-.rcf-bubble.is-active svg { transform: rotate(-12deg) scale(1.08); }
-.rcf-bubble:hover:not(.is-active) { transform: scale(1.08); }
+.rcf-bob { animation: none; }
+.rcf-bubble {
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+  color: var(--fg);
+  box-shadow: 0 6px 16px -8px rgba(11, 26, 51, 0.35);
+  transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+}
+.rcf-bubble svg {
+  width: 42%;
+  height: 42%;
+  transition: transform .4s ease;
+}
+.rcf-bubble.is-active {
+  transform: scale(1.08);
+  border-color: rgba(255, 255, 255, 1);
+  box-shadow:
+    0 0 0 2px color-mix(in srgb, var(--bg) 25%, transparent),
+    0 10px 24px -10px rgba(11, 26, 51, 0.45);
+}
+.rcf-bubble.is-active svg { transform: scale(1.04); }
+.rcf-bubble:hover:not(.is-active) {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px -10px rgba(11, 26, 51, 0.4);
+}
 .rcf-pill {
-  display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 999px; white-space: nowrap;
-  background: var(--bg); color: var(--fg); font-size: clamp(12px, 1vw, 15px); font-weight: 800;
-  box-shadow: 0 0 0 3px #fff, 0 12px 26px -10px rgba(11,26,51,.45); transform: rotate(var(--r, 0deg));
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  white-space: nowrap;
+  background: var(--bg);
+  color: var(--fg);
+  font-size: clamp(12px, 1vw, 14px);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 0 6px 14px -6px rgba(11, 26, 51, 0.3);
+  /* No rotation — perfectly aligned, geometric */
+}
+@keyframes rcf-fade {
+  to { opacity: 1; transform: none; }
 }
 .rcf-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 

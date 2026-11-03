@@ -28,38 +28,38 @@
          Theme kept dark on every slide — same left-side scrim across all 4 images. */
   const SLIDES = [
     {
-      // "Vibrant sunlit Australian property consultation-3" — consultative, professional
+      // "Australian Conveyancer Reviewing Property Plans-1" — focused, in control
       theme: "",
       head:  "Conveyancing,",
       italic:"in real time.",
-      lede:  "Live settlement updates, automated workflows, and clients always in the loop. All on one paperless platform.",
+      lede:  "Paperless matters, automated workflows and clients always in the loop. All on one platform, built by conveyancers for conveyancers.",
       cta:   "Book a demo",
       href:  "/book-a-demo/"
     },
     {
-      // "Sunlit family in vibrant colors-2" — bright, warm, celebratory
+      // "Australian conveyancing team planning together-2" — team collaboration
       theme: "",
-      head:  "Every matter,",
-      italic:"clearer than ever.",
-      lede:  "Automated workflows cut 8 hours of busywork to 4.5. Your team spends time on what actually needs a conveyancer.",
+      head:  "Your whole team,",
+      italic:"on the same page.",
+      lede:  "One shared matter view. Live updates. Automation that cuts 8 hours of busywork down to 4.5 per matter.",
       cta:   "Explore the platform",
       href:  "/tms/"
     },
     {
-      // "Vibrant sunlit home lifestyle portrait-1" — lifestyle, intimate
+      // "Confident mobile conveyancing on the terrace-3" — work from anywhere
       theme: "",
-      head:  "Every client,",
-      italic:"always in the loop.",
-      lede:  "Pathway to Settlement puts live updates in your clients' pocket, before they ever think to call.",
-      cta:   "See the client app",
-      href:  "/pts/"
+      head:  "Settle from",
+      italic:"anywhere you work.",
+      lede:  "Laptop, tablet or phone. From the office, from home, from the road — the same live matter, in sync.",
+      cta:   "Book a demo",
+      href:  "/book-a-demo/"
     },
     {
-      // "Family Celebrates Their New Home" — moment of arrival
+      // "Personal property title plan consultation-4" — client consultation
       theme: "",
-      head:  "Every settlement,",
-      italic:"worth celebrating.",
-      lede:  "From contract to keys, deliver the moments your clients remember with the security they trust.",
+      head:  "Every client,",
+      italic:"confidently in the loop.",
+      lede:  "The Pathway to Settlement app shows clients, agents and brokers exactly where they are — before they think to call.",
       cta:   "Book a demo",
       href:  "/book-a-demo/"
     }

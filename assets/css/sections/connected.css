@@ -98,7 +98,7 @@
 .rcc-col--team .rcc-panel-glow { background: rgba(79,134,189,.35); }
 .rcc-col--client .rcc-panel-glow { background: rgba(200,106,155,.32); }
 .rcc-col--team .rcc-panel-shape { background: linear-gradient(180deg, #d3e6f5 0%, #a9cdea 45%, #7fb2d6 100%); }
-.rcc-col--client .rcc-panel-shape { background: linear-gradient(180deg, #f8dde9 0%, #efbad2 45%, #e09bbd 100%); }
+.rcc-col--client .rcc-panel-shape { background: linear-gradient(180deg, #eee3e6 0%, #d7c6ca 45%, #bba7ac 100%); }
 .rcc-shine { position: absolute; inset: 0; }
 .rcc-col--team .rcc-shine { background: radial-gradient(ellipse 60% 50% at 70% 0%, rgba(255,255,255,.55), rgba(255,255,255,0) 70%); }
 .rcc-col--client .rcc-shine { background: radial-gradient(ellipse 60% 50% at 30% 0%, rgba(255,255,255,.55), rgba(255,255,255,0) 70%); }
@@ -340,7 +340,7 @@
 .rcc-band--team .rcc-band-fill { top: -120px; bottom: 60px;
   background: radial-gradient(ellipse 50% 80% at 100% 30%, rgba(255,255,255,.55), transparent 70%), linear-gradient(110deg, #d3e6f5 0%, #a9cdea 55%, #7fb2d6 100%); }
 .rcc-band--client .rcc-band-fill { top: 60px; bottom: -120px;
-  background: radial-gradient(ellipse 50% 80% at 0% 70%, rgba(255,255,255,.55), transparent 70%), linear-gradient(250deg, #f8dde9 0%, #efbad2 55%, #e09bbd 100%); }
+  background: radial-gradient(ellipse 50% 80% at 0% 70%, rgba(255,255,255,.55), transparent 70%), linear-gradient(250deg, #eee3e6 0%, #d7c6ca 55%, #bba7ac 100%); }
 .rcc-band--team .rcc-band-shape::after, .rcc-band--client .rcc-band-shape::after { content: none; }
 .rcc-band { filter: drop-shadow(0 24px 30px rgba(22,48,91,.14)); }
 .rcc-band-fill .rcc-grid { -webkit-mask-image: linear-gradient(90deg, rgba(0,0,0,.8), transparent 70%); mask-image: linear-gradient(90deg, rgba(0,0,0,.8), transparent 70%); }

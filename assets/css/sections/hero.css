@@ -18,15 +18,15 @@
   --hero-cta-chip-text: var(--rc-navy);
   --hero-scrim:
     linear-gradient(90deg,
-      rgba(10, 20, 40, 0.80) 0%,
-      rgba(10, 20, 40, 0.55) 32%,
-      rgba(10, 20, 40, 0.18) 60%,
-      rgba(10, 20, 40, 0.05) 100%),
+      rgba(13, 28, 55, 0.85) 0%,
+      rgba(13, 28, 55, 0.58) 32%,
+      rgba(13, 28, 55, 0.2) 60%,
+      rgba(13, 28, 55, 0.05) 100%),
     linear-gradient(180deg,
-      rgba(10, 20, 40, 0.30) 0%,
-      transparent 20%,
-      transparent 70%,
-      rgba(10, 20, 40, 0.45) 100%);
+      rgba(13, 28, 55, 0.4) 0%,
+      transparent 24%,
+      transparent 72%,
+      rgba(13, 28, 55, 0.55) 100%);
   --hero-dot-base:   rgba(255, 255, 255, 0.35);
   --hero-dot-active: var(--rc-pink);
   --hero-scroll:     rgba(255, 255, 255, 0.75);
@@ -156,9 +156,6 @@
     radial-gradient(1200px 900px at 70% 40%, rgba(255, 255, 255, 0.25), transparent 60%),
     radial-gradient(800px 700px at 20% 80%, rgba(22, 48, 91, 0.5), transparent 60%),
     linear-gradient(135deg, var(--rc-pink) 0%, #c9789b 50%, var(--rc-navy) 100%);
-  /* Subject sits near the top of this photo; anchor the image to the top so the fixed
-     header doesn't crop it. The default `center 45%` was clipping the father's face. */
-  background-position: center top;
 }
 
 /* ---------- Scrim (left-weighted for text contrast) ---------- */
@@ -487,9 +484,9 @@
   .hero {
     --hero-scrim:
       linear-gradient(180deg,
-        rgba(10, 20, 40, 0.35) 0%,
-        rgba(10, 20, 40, 0.55) 50%,
-        rgba(10, 20, 40, 0.85) 100%);
+        rgba(13, 28, 55, 0.42) 0%,
+        rgba(13, 28, 55, 0.62) 50%,
+        rgba(13, 28, 55, 0.9) 100%);
   }
   .hero.is-theme-light {
     --hero-scrim:

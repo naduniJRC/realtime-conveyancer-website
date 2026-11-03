@@ -1,0 +1,235 @@
+/* Features-at-a-glance: 3x3 grid of real product features.
+   Scannable, professional, navy-dominant. */
+
+.features {
+  position: relative;
+  background: var(--rc-surface);
+  padding-block: clamp(4rem, 7vw, 6rem);
+  overflow: hidden;
+}
+.features .container { position: relative; z-index: 1; }
+
+/* ---------- Section header (consistent with other sections) ---------- */
+.features__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin: 0 0 1.25rem;
+  padding: 0.4rem 0.95rem 0.4rem 0.75rem;
+  background: var(--rc-pink-soft);
+  color: var(--rc-navy);
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.features__eyebrow::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  background: var(--rc-pink);
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px rgba(246, 205, 225, 0.4);
+}
+.features__heading {
+  margin: 0;
+  font-size: clamp(1.75rem, 3.4vw, 2.75rem);
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  color: var(--rc-navy);
+  text-wrap: balance;
+}
+.features__heading-accent {
+  display: inline-block;
+  font-style: italic;
+  font-weight: 600;
+  color: var(--rc-navy);
+}
+.features__sub {
+  margin: 0.9rem 0 clamp(2.5rem, 4vw, 3.5rem);
+  max-width: 640px;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--rc-muted);
+}
+
+/* ---------- 3x3 grid ---------- */
+.features__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+/* ---------- Feature card ---------- */
+.feat-card {
+  position: relative;
+  padding: 1.5rem 1.5rem 1.5rem;
+  background: #fff;
+  border: 1px solid rgba(19, 52, 89, 0.06);
+  border-radius: 20px;
+  box-shadow: 0 6px 16px -12px rgba(19, 52, 89, 0.12);
+  overflow: hidden;
+  transition:
+    transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.35s ease,
+    border-color 0.3s ease,
+    opacity 0.6s ease;
+}
+/* Subtle top accent — wipes in from the left on hover */
+.feat-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  background: linear-gradient(90deg, var(--rc-blue) 0%, var(--rc-navy) 60%, transparent 100%);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.feat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 28px -16px rgba(19, 52, 89, 0.22);
+  border-color: rgba(19, 52, 89, 0.12);
+}
+.feat-card:hover::before { transform: scaleX(1); }
+.feat-card__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--rc-blue-soft);
+  color: var(--rc-navy);
+  margin-bottom: 1rem;
+  transition: background 0.3s ease, transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.feat-card:hover .feat-card__icon {
+  background: color-mix(in srgb, var(--rc-blue-soft) 60%, var(--rc-blue) 100%);
+  transform: scale(1.08);
+}
+.feat-card__title {
+  margin: 0 0 0.35rem;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: var(--rc-navy);
+}
+.feat-card__desc {
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: var(--rc-muted);
+}
+
+/* Featured card — the "hero" feature (Pathway to Settlement app in the centre) */
+.feat-card--featured {
+  background: linear-gradient(145deg, var(--rc-navy) 0%, #1f3f73 100%);
+  border-color: transparent;
+}
+.feat-card--featured .feat-card__icon {
+  background: rgba(255, 255, 255, 0.14);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+.feat-card--featured:hover .feat-card__icon {
+  background: var(--rc-pink);
+  border-color: var(--rc-pink);
+  color: var(--rc-navy);
+}
+.feat-card--featured .feat-card__title { color: #fff; }
+.feat-card--featured .feat-card__desc { color: rgba(255, 255, 255, 0.78); }
+.feat-card--featured::after {
+  /* Soft pink glow in top-right */
+  content: "";
+  position: absolute;
+  width: 140px;
+  height: 140px;
+  top: -40px;
+  right: -40px;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(246, 205, 225, 0.25), transparent 70%);
+  pointer-events: none;
+}
+
+/* ---------- Scroll-reveal stagger ---------- */
+.features.js .feat-card {
+  opacity: 0;
+  transform: translateY(16px);
+}
+.features.js.is-ready .feat-card {
+  opacity: 1;
+  transform: none;
+}
+.features.js.is-ready .feat-card:nth-child(1) { transition-delay: 0ms; }
+.features.js.is-ready .feat-card:nth-child(2) { transition-delay: 60ms; }
+.features.js.is-ready .feat-card:nth-child(3) { transition-delay: 120ms; }
+.features.js.is-ready .feat-card:nth-child(4) { transition-delay: 180ms; }
+.features.js.is-ready .feat-card:nth-child(5) { transition-delay: 240ms; }
+.features.js.is-ready .feat-card:nth-child(6) { transition-delay: 300ms; }
+.features.js.is-ready .feat-card:nth-child(7) { transition-delay: 360ms; }
+.features.js.is-ready .feat-card:nth-child(8) { transition-delay: 420ms; }
+.features.js.is-ready .feat-card:nth-child(9) { transition-delay: 480ms; }
+.features.js.is-ready .feat-card:hover { transform: translateY(-4px); transition-delay: 0ms; }
+
+/* ---------- Closing "Explore all features" link ---------- */
+.features__more {
+  margin: clamp(2rem, 3vw, 2.75rem) auto 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 0.6rem 0.6rem 1.3rem;
+  background: #fff;
+  color: var(--rc-navy);
+  border: 1px solid rgba(19, 52, 89, 0.1);
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 6px 16px -10px rgba(19, 52, 89, 0.15);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+.features__more:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px -14px rgba(19, 52, 89, 0.22);
+  border-color: rgba(19, 52, 89, 0.18);
+}
+.features__more-arrow {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--rc-blue-soft);
+  color: var(--rc-navy);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+.features__more:hover .features__more-arrow {
+  transform: translateX(3px);
+  background: var(--rc-blue);
+  color: #fff;
+}
+.features .container { display: flex; flex-direction: column; }
+.features__eyebrow,
+.features__heading,
+.features__sub { align-self: flex-start; }
+.features__more { align-self: flex-start; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+  .features__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 540px) {
+  .features__grid { grid-template-columns: 1fr; }
+  .feat-card { padding: 1.25rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .features.js .feat-card { opacity: 1; transform: none; }
+  .features *, .features *::before, .features *::after { transition: none !important; }
+}
