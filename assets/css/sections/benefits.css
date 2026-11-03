@@ -97,7 +97,7 @@
 .rcb-place { padding: 7px 13px; border-radius: 999px; background: var(--pink-soft); font-size: 12px; font-weight: 700; color: #9b3d6e; }
 /* ================= Modern glass bento cards ================= */
 .rcb-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 24px; margin-bottom: 40px; }
-.rcb-cards { display: flex; gap: 14px; height: 440px; }
+.rcb-cards { display: flex; gap: 14px; height: 500px; }
 
 .rcb-card {
   --c: var(--blue);
@@ -120,9 +120,18 @@
     transform 0.3s ease,
     box-shadow 0.3s ease;
 }
-/* All three cards share the navy family — gentle shade variation only */
-.rcb-card--2 { --c: #2a5a94; --soft: var(--blue-soft); --mid: #9cc8e8; }
+/* Card 2 wears a soft rose; cards 1 + 3 stay in the navy family */
+.rcb-card--2 { --c: #c58b9f; --soft: #f6e4ea; --mid: #e4bfcc; }
 .rcb-card--3 { --c: var(--navy); --soft: var(--blue-soft); --mid: #9cc8e8; }
+
+/* Card 2's CTA pill wears the full rose (not navy) */
+.rcb-card--2 .rcb-btn {
+  background: linear-gradient(90deg, #c58b9f, #a67a89);
+}
+.rcb-card--2 .rcb-btn i {
+  background: #fff;
+  color: #c58b9f;
+}
 .rcb-card.rcb-on {
   flex: 1 1 0;
   box-shadow:

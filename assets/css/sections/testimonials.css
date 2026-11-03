@@ -99,8 +99,8 @@
   z-index: 2;
 }
 /* All cards use the navy palette with gentle shade variation */
-.rct-card:nth-child(3n+2) { --accent: #2a5a94; --accent-soft: var(--blue-soft); }
-.rct-card:nth-child(3n+3) { --accent: var(--navy); --accent-soft: var(--blue-soft); }
+/* Alternating blue and pink only — no green */
+.rct-card:nth-child(2n) { --accent: var(--pink); --accent-soft: var(--pink-soft); }
 .rct-card[data-pos="0"]  { transform: translateX(0) scale(1); opacity: 1; z-index: 3; pointer-events: auto; }
 .rct-card[data-pos="-1"] { transform: translateX(-64%) scale(.82) rotateY(12deg); opacity: .5; z-index: 2; filter: saturate(.6); pointer-events: auto; cursor: pointer; }
 .rct-card[data-pos="1"]  { transform: translateX(64%) scale(.82) rotateY(-12deg); opacity: .5; z-index: 2; filter: saturate(.6); pointer-events: auto; cursor: pointer; }
