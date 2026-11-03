@@ -60,7 +60,7 @@
       head:  "Every settlement,",
       italic:"worth celebrating.",
       lede:  "From contract to keys, deliver the moments your clients remember with the security they trust.",
-      cta:   "Protect your clients",
+      cta:   "Book a demo",
       href:  "/book-a-demo/"
     }
   ];
