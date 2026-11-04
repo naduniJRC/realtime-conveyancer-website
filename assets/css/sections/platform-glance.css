@@ -1187,58 +1187,108 @@
   color: rgba(255, 255, 255, 0.72);
 }
 
-/* ---------- Integration groups (3 columns) ---------- */
-.pstory__eco-groups {
+/* ---------- 3 category columns on the dark navy band ---------- */
+.pstory__eco-grid {
   position: relative;
   z-index: 1;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1.25rem;
+  gap: 1.5rem 2rem;
   margin-bottom: 2rem;
 }
-.eco-group {
-  padding: 1.25rem;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 16px;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-}
-.eco-group__label {
-  margin: 0 0 0.9rem;
-  padding-bottom: 0.75rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  font-size: 0.7rem;
-  font-weight: 800;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--rc-pink);
-}
-.eco-group__list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+.eco-col {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
 }
-.eco-group__list li {
+.eco-col__label {
+  margin: 0 0 0.25rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--rc-pink);
+}
+
+/* Dark translucent card sitting on the navy band */
+.eco-card {
+  display: flex;
+  align-items: stretch;
+  gap: 1rem;
+  padding: 0.6rem;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 14px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition:
+    transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+    background 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+.eco-card:hover {
+  transform: translateY(-3px);
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(246, 205, 225, 0.35);
+  box-shadow: 0 14px 28px -14px rgba(0, 0, 0, 0.45);
+}
+
+/* Prominent white "logo well" — the actual brand logo sits on bright white */
+.eco-card__logo {
+  flex: 0 0 44%;
+  min-height: 84px;
+  background: #fff;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.65rem 0.85rem;
+  box-shadow: inset 0 0 0 1px rgba(19, 52, 89, 0.05);
+}
+.eco-card__logo img {
+  max-width: 100%;
+  max-height: 60px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
+/* Monogram fallback — sits inside the white well, so override to a small chip look */
+.eco-card__mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.35rem 0.75rem;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+/* Partner name + short description (light-on-dark) */
+.eco-card__body {
   display: flex;
   flex-direction: column;
-  gap: 0.15rem;
-  transition: transform 0.25s ease;
+  gap: 0.25rem;
+  min-width: 0;
+  justify-content: center;
+  padding-right: 0.25rem;
 }
-.eco-group__list li:hover { transform: translateX(2px); }
-.eco-group__list strong {
-  font-size: 0.95rem;
+.eco-card__body strong {
+  font-size: 0.98rem;
   font-weight: 700;
   color: #fff;
   letter-spacing: -0.01em;
+  line-height: 1.2;
 }
-.eco-group__list small {
-  font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.6);
+.eco-card__body small {
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.72);
   font-weight: 500;
+  line-height: 1.4;
 }
 
 /* ---------- Trust badges on the dark band ---------- */
@@ -1281,7 +1331,11 @@
 
 /* ---------- Responsive ---------- */
 @media (max-width: 1024px) {
-  .pstory__eco-groups { grid-template-columns: 1fr; }
+  .pstory__eco-grid { grid-template-columns: 1fr; gap: 1.75rem; }
+}
+@media (max-width: 640px) {
+  .eco-card__logo { flex: 0 0 38%; min-height: 72px; }
+  .eco-card__logo img { max-height: 48px; }
 }
 @media (max-width: 900px) {
   .pstory__stage { width: 760px; height: 620px; }

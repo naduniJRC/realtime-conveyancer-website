@@ -32,7 +32,7 @@
       theme: "",
       head:  "A clearer view",
       italic:"of every matter.",
-      lede:  "Keep your matters organised and progress easy to follow — so you can see what needs attention and move through your day with confidence.",
+      lede:  "Keep your matters organised and progress easy to follow, so you can see what needs attention and move through your day with confidence.",
       cta:   "Book a demo",
       href:  "/book-a-demo/"
     },
@@ -50,7 +50,7 @@
       theme: "",
       head:  "Confidence in",
       italic:"the details that count.",
-      lede:  "Bring trust accounting and settlement financial processes into your conveyancing workflow — helping your team manage the details with greater clarity.",
+      lede:  "Bring trust accounting and settlement financial processes into your conveyancing workflow, helping your team manage the details with greater clarity.",
       cta:   "Book a demo",
       href:  "/book-a-demo/"
     },

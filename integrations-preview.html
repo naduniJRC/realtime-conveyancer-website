@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Integrations — 3 concepts · Realtime Conveyancer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy-900:#0E1F3A;--navy-700:#192F4E;--navy-500:#1F4165;
+  --pink:#F6CBDD;--pink-ink:#A3245E;--line-d:rgba(255,255,255,.12);--dim:#B9C3D2;
+  --ink:#0E1F3A;--muted:#55627A;--line:#E3E8EF;--bg:#F6F8FB;--ok:#16A34A;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Montserrat",system-ui,sans-serif;background:#fff;color:var(--ink)}
+.label-bar{max-width:1200px;margin:56px auto 14px;padding:0 24px;display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.label-bar b{font-size:13px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--pink-ink)}
+.label-bar span{font-size:15px;color:var(--muted)}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:8px 14px;border-radius:99px}
+.eyebrow i{width:8px;height:8px;border-radius:50%;background:#4ADE80;box-shadow:0 0 0 4px rgba(74,222,128,.18)}
+h2{margin:20px 0 0;font-size:clamp(30px,4vw,48px);line-height:1.1;font-weight:800;letter-spacing:-.02em;text-wrap:balance}
+h2 em{font-style:italic;font-weight:600}
+.sub{margin:16px auto 0;font-size:17px;line-height:1.6;max-width:580px}
+
+/* shared logo plate */
+.logo{display:grid;place-items:center;background:#fff}
+.logo img{max-width:100%;max-height:100%;object-fit:contain;display:block}
+.logo [hidden]{display:none !important}
+.logo .wm{font-weight:800;color:var(--navy-900);text-align:center;line-height:1.1;letter-spacing:-.01em}
+
+/* =============== A · HUB =============== */
+.ia{max-width:1200px;margin:0 auto;border-radius:28px;color:#fff;padding:72px 40px 64px;overflow:hidden;position:relative;
+  background:radial-gradient(60% 70% at 50% 62%,rgba(246,203,221,.10),transparent 70%),linear-gradient(160deg,var(--navy-900),var(--navy-700) 60%,var(--navy-500))}
+.ia .head{text-align:center}
+.ia .eyebrow{border:1px solid var(--line-d);background:rgba(255,255,255,.04)}
+.ia h2 em{color:var(--pink)}
+.ia .sub{color:var(--dim)}
+.hub{position:relative;width:1040px;height:560px;margin:40px auto 0;transform-origin:top center}
+.hub svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.hub .wire{stroke:rgba(255,255,255,.16);stroke-width:1.5;fill:none}
+.hub .pulse{fill:var(--pink)}
+.core{position:absolute;left:50%;top:50%;width:150px;height:150px;transform:translate(-50%,-50%);border-radius:36px;background:#fff;display:grid;place-items:center;text-align:center;box-shadow:0 0 0 10px rgba(255,255,255,.06),0 0 0 22px rgba(255,255,255,.03),0 30px 70px -20px rgba(0,0,0,.6)}
+.core b{display:block;width:56px;height:56px;margin:0 auto 8px;border-radius:16px;background:var(--navy-900);color:#fff;font-size:17px;line-height:56px}
+.core span{font-size:12px;font-weight:700;color:var(--navy-900)}
+.node{position:absolute;width:168px;transform:translate(-50%,-50%);text-align:center}
+.node .logo{height:78px;border-radius:18px;padding:14px 20px;box-shadow:0 18px 40px -18px rgba(0,0,0,.7);transition:transform .3s,box-shadow .3s}
+.node:hover .logo{transform:translateY(-4px) scale(1.04);box-shadow:0 0 0 3px var(--pink),0 22px 44px -18px rgba(0,0,0,.7)}
+.node .logo img{max-height:40px}
+.node .wm{font-size:16px}
+.node p{margin:10px 0 0;font-size:12.5px;color:var(--dim);line-height:1.35}
+.node p b{display:block;color:#fff;font-size:14px;margin-bottom:2px}
+.ia .legend{display:flex;justify-content:center;gap:28px;margin-top:64px;flex-wrap:wrap;font-size:13px;color:var(--dim)}
+.ia .legend span{display:flex;align-items:center;gap:8px}
+.ia .legend i{width:10px;height:10px;border-radius:3px}
+
+/* =============== B · BENTO (light) =============== */
+.ib{max-width:1200px;margin:0 auto;border-radius:28px;background:var(--bg);padding:72px 40px 48px;border:1px solid var(--line)}
+.ib .head{text-align:center}
+.ib .eyebrow{background:#fff;border:1px solid var(--line);color:var(--navy-900)}
+.ib h2{color:var(--navy-900)}
+.ib h2 em{color:var(--pink-ink)}
+.ib .sub{color:var(--muted)}
+.bento{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-top:48px}
+.tile{background:#fff;border:1px solid var(--line);border-radius:22px;padding:24px;display:flex;flex-direction:column;justify-content:space-between;min-height:200px;position:relative;transition:transform .25s,box-shadow .25s,border-color .25s}
+.tile:hover{transform:translateY(-4px);border-color:#E9B3CB;box-shadow:0 24px 48px -28px rgba(14,31,58,.35)}
+.tile .logo{height:52px;justify-items:start;background:none}
+.tile .logo img{max-height:52px;max-width:200px}
+.tile:not(.hero) .logo{margin-right:92px}
+.tile .wm{font-size:24px;text-align:left}
+.tile .live{position:absolute;top:22px;right:22px;font-size:11px;font-weight:700;color:var(--ok);display:flex;align-items:center;gap:6px}
+.tile .live i{width:7px;height:7px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 4px rgba(22,163,74,.15)}
+.tile h3{margin:28px 0 0;font-size:17px;font-weight:700}
+.tile p{margin:6px 0 0;font-size:14px;line-height:1.5;color:var(--muted)}
+.tile.hero{grid-column:span 2;grid-row:span 2;background:linear-gradient(160deg,var(--navy-900),var(--navy-500));color:#fff;border:0}
+.tile.hero .logo{height:72px;background:#fff;border-radius:16px;padding:12px 22px;justify-items:center;width:220px}
+.tile.hero .logo img{max-height:48px}
+.tile.hero .live{color:#86EFAC}.tile.hero .live i{background:#4ADE80}
+.tile.hero h3{font-size:26px;letter-spacing:-.01em;line-height:1.2;margin-top:32px}
+.tile.hero p{color:var(--dim);font-size:15px}
+.feed{margin-top:22px;display:flex;flex-direction:column;gap:8px}
+.feed div{display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,.07);border:1px solid var(--line-d);border-radius:12px;padding:11px 14px;font-size:13.5px;opacity:0;transform:translateY(8px);transition:opacity .5s,transform .5s}
+.feed div b{color:#86EFAC;font-size:12px}
+.ib.in .feed div{opacity:1;transform:none}
+.ib.in .feed div:nth-child(2){transition-delay:.25s}.ib.in .feed div:nth-child(3){transition-delay:.5s}
+.tile.wide{grid-column:span 2}
+.ib .trust{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 28px;margin-top:36px;font-size:13.5px;font-weight:600;color:var(--muted)}
+.ib .trust span::before{content:"✓";color:var(--pink-ink);margin-right:8px;font-weight:800}
+
+/* =============== C · JOURNEY =============== */
+.ic{max-width:1200px;margin:0 auto;border-radius:28px;color:#fff;padding:72px 40px 56px;overflow:hidden;background:linear-gradient(160deg,var(--navy-900),var(--navy-700) 55%,var(--navy-500))}
+.ic .head{text-align:center}
+.ic .eyebrow{border:1px solid var(--line-d);background:rgba(255,255,255,.04)}
+.ic h2 em{color:var(--pink)}
+.ic .sub{color:var(--dim)}
+.track{position:relative;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:16px;margin-top:56px}
+.track::before,.track::after{content:"";position:absolute;left:8.4%;right:8.4%;top:19px;height:2px;border-radius:2px}
+.track::before{background:var(--line-d)}
+.track::after{background:linear-gradient(90deg,var(--pink),#fff);transform:scaleX(0);transform-origin:left;transition:transform 2.2s cubic-bezier(.4,0,.2,1)}
+.ic.in .track::after{transform:scaleX(1)}
+.stage{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;text-align:center}
+.dot{width:40px;height:40px;border-radius:50%;background:var(--navy-900);border:2px solid rgba(255,255,255,.25);display:grid;place-items:center;font-size:13px;font-weight:800;transition:background .4s,border-color .4s,color .4s}
+.ic.in .stage .dot{background:var(--pink);border-color:var(--pink);color:var(--navy-900)}
+.ic.in .stage:nth-child(2) .dot{transition-delay:.35s}.ic.in .stage:nth-child(3) .dot{transition-delay:.7s}
+.ic.in .stage:nth-child(4) .dot{transition-delay:1.05s}.ic.in .stage:nth-child(5) .dot{transition-delay:1.4s}.ic.in .stage:nth-child(6) .dot{transition-delay:1.75s}
+.stage h3{margin:14px 0 2px;font-size:16px;font-weight:800}
+.stage small{font-size:12.5px;color:var(--dim);min-height:34px;line-height:1.35}
+.stack{display:flex;flex-direction:column;gap:10px;margin-top:16px;width:100%}
+.card{background:#fff;border-radius:16px;padding:10px 10px 12px;color:var(--navy-900);box-shadow:0 18px 36px -20px rgba(0,0,0,.7);transition:transform .25s}
+.card:hover{transform:translateY(-4px)}
+.card .logo{height:58px;padding:6px 10px}
+.card .logo img{max-height:38px}
+.card .wm{font-size:15px}
+.card span{display:block;font-size:11.5px;color:var(--muted);margin-top:4px;line-height:1.3}
+.always{margin-top:28px;display:flex;align-items:center;gap:20px;border:1px dashed rgba(255,255,255,.25);border-radius:18px;padding:14px 18px}
+.always .logo{width:170px;height:60px;border-radius:12px;padding:10px 16px;flex:none}
+.always .logo img{max-height:36px}
+.always p{margin:0;font-size:15px;color:#E4E9F0}
+.always p b{color:#fff}
+
+/* responsive */
+@media (max-width:1100px){.hub{transform:scale(.8);margin-bottom:-112px}}
+@media (max-width:860px){
+  .ia .legend{margin-top:28px}
+  .ia,.ib,.ic{border-radius:20px;padding:56px 18px 40px;margin:0 12px}
+  .hub{width:auto;height:auto;transform:none;margin-bottom:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 14px}
+  .hub svg{display:none}
+  .core{position:relative;left:auto;top:auto;transform:none;grid-column:1/-1;margin:0 auto 6px}
+  .node{position:relative;left:auto !important;top:auto !important;transform:none;width:auto}
+  .bento{grid-template-columns:minmax(0,1fr)}
+  .tile.hero,.tile.wide{grid-column:auto;grid-row:auto}
+  .track{grid-template-columns:minmax(0,1fr);gap:28px;padding-left:56px}
+  .track::before,.track::after{left:19px;right:auto;top:20px;bottom:20px;width:2px;height:auto;transform-origin:top}
+  .track::after{transform:scaleY(0);background:linear-gradient(180deg,var(--pink),#fff)}
+  .ic.in .track::after{transform:scaleY(1)}
+  .stage{align-items:flex-start;text-align:left}
+  .stage .dot{position:absolute;left:-56px;top:0}
+  .stage h3{margin-top:8px}
+  .stage small{min-height:0}
+  .stack{flex-direction:row;flex-wrap:wrap}
+  .stack .card{flex:1 1 140px}
+  .always{flex-direction:column;align-items:flex-start}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none !important}.pulse{display:none}}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     A · THE HUB — Realtime in the centre, every partner wired in
+     ============================================================ -->
+<div class="label-bar"><b>Idea A · The hub</b><span>Literally "wired up": data pulses travel from each partner into Realtime.</span></div>
+<section class="ia" aria-labelledby="ia-t">
+  <div class="head">
+    <span class="eyebrow"><i aria-hidden="true"></i>Already connected</span>
+    <h2 id="ia-t">The <em>whole property ecosystem</em>, already wired up.</h2>
+    <p class="sub">Nine integrations run quietly behind every matter, so your team never has to re-key, re-check or re-send.</p>
+  </div>
+  <div class="hub" id="hub">
+    <svg viewBox="0 0 1040 560" aria-hidden="true" id="hubSvg"></svg>
+    <div class="core"><div><b>RTC</b><span>Realtime<br>Conveyancer</span></div></div>
+  </div>
+  <div class="legend" aria-hidden="true">
+    <span><i style="background:#F6CBDD"></i>Settlement &amp; land</span>
+    <span><i style="background:#93C5FD"></i>Identity &amp; signing</span>
+    <span><i style="background:#86EFAC"></i>Property &amp; business</span>
+  </div>
+</section>
+
+<!-- ============================================================
+     B · BENTO — light, logos in native colour, PEXA as the hero
+     ============================================================ -->
+<div class="label-bar"><b>Idea B · Logo bento</b><span>Light background so every logo shows in its true colours, with PEXA leading.</span></div>
+<section class="ib" id="ib" aria-labelledby="ib-t">
+  <div class="head">
+    <span class="eyebrow"><i aria-hidden="true"></i>Already connected</span>
+    <h2 id="ib-t">The <em>whole property ecosystem</em>, already wired up.</h2>
+    <p class="sub">Nine integrations run quietly behind every matter, so your team never has to re-key, re-check or re-send.</p>
+  </div>
+  <div class="bento" id="bento"></div>
+  <div class="trust"><span>Built by conveyancers</span><span>Cyber Safe PropTech 2023 &amp; 2024</span><span>Multi-factor authentication</span><span>Any device, any location</span><span>Compliant trust accounting</span><span>Client app on iOS</span></div>
+</section>
+
+<!-- ============================================================
+     C · THE JOURNEY — logos placed at the step where they work
+     ============================================================ -->
+<div class="label-bar"><b>Idea C · Contract to keys</b><span>Each logo sits at the step of the matter where it does its job.</span></div>
+<section class="ic" id="ic" aria-labelledby="ic-t">
+  <div class="head">
+    <span class="eyebrow"><i aria-hidden="true"></i>Already connected</span>
+    <h2 id="ic-t">Connected at <em>every step</em>, from contract to keys.</h2>
+    <p class="sub">The right partner is built in at each stage of the matter, so nothing gets re-keyed along the way.</p>
+  </div>
+  <ol class="track" id="track" style="list-style:none;padding-right:0;margin-bottom:0"></ol>
+  <div class="always" id="always"></div>
+  <p style="height:20px"></p>
+</section>
+<p style="height:60px"></p>
+
+<script>
+/* ---- One place for logo files: point these at your site's assets ---- */
+var LOGOS={
+  pexa:{name:'PEXA',src:'assets/images/logos/pexa.svg',desc:'E-conveyancing workspaces',g:0},
+  lssa:{name:'Land Services SA',src:'assets/images/logos/land-services-sa.svg',desc:'Searches and titles',g:0},
+  stewart:{name:'Stewart Title',src:'assets/images/logos/headerLogo.png',desc:'Title insurance',g:0},
+  docusign:{name:'DocuSign',src:'assets/images/logos/docusign.svg',desc:'E-signatures in the app',g:1},
+  livesign:{name:'Livesign',src:'assets/images/logos/livesign.svg',desc:'ID verification',g:1},
+  easyaml:{name:'easyAML',src:'assets/images/logos/easyaml.svg',desc:'AML compliance checks',g:1},
+  movinghub:{name:'Movinghub',src:'assets/images/logos/movinghub.svg',desc:'Client utilities and moving',g:2},
+  vaultre:{name:'VaultRE',src:'assets/images/logos/vaultre-support-logo.png',desc:'Real estate CRM, contract sharing',g:2},
+  o365:{name:'Office 365',src:'assets/images/logos/microsoft-365.svg',desc:'Email, calendar and documents',g:2}
+};
+function logo(k){
+  var l=LOGOS[k];
+  return '<div class="logo"><img src="'+l.src+'" alt="'+l.name+'" onerror="this.hidden=true;this.nextElementSibling.hidden=false"><span class="wm" hidden>'+l.name+'</span></div>';
+}
+var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ---------- A: hub ---------- */
+(function(){
+  var hub=document.getElementById('hub'), svg=document.getElementById('hubSvg');
+  var cx=520, cy=280, colors=['#F6CBDD','#93C5FD','#86EFAC'];
+  var order=['pexa','lssa','stewart','docusign','livesign','easyaml','movinghub','vaultre','o365'];
+  var pos=[[150,95],[95,280],[150,465],[380,40],[660,40],[890,95],[945,280],[890,465],[520,525]];
+  var paths='';
+  order.forEach(function(k,i){
+    var p=pos[i], l=LOGOS[k];
+    var mx=(p[0]+cx)/2+(p[1]-cy)*.12, my=(p[1]+cy)/2-(p[0]-cx)*.06;
+    var d='M'+p[0]+','+p[1]+' Q'+mx+','+my+' '+cx+','+cy;
+    paths+='<path class="wire" id="w'+i+'" d="'+d+'"/>';
+    if(!reduce) paths+='<circle class="pulse" r="3.5" cx="0" cy="0" opacity="0" fill="'+colors[l.g]+'"><animateMotion dur="'+(2.6+(i%3)*.5)+'s" begin="'+(i*.37)+'s" repeatCount="indefinite"><mpath href="#w'+i+'"/></animateMotion><set attributeName="opacity" to="1" begin="'+(i*.37)+'s"/></circle>';
+    var n=document.createElement('div'); n.className='node'; n.style.left=p[0]+'px'; n.style.top=p[1]+'px';
+    n.innerHTML=logo(k)+'<p><b>'+l.name+'</b>'+l.desc+'</p>';
+    n.querySelector('.logo').style.boxShadow='0 0 0 2px '+colors[l.g]+'55, 0 18px 40px -18px rgba(0,0,0,.7)';
+    hub.appendChild(n);
+  });
+  svg.innerHTML=paths;
+})();
+
+/* ---------- B: bento ---------- */
+(function(){
+  var b=document.getElementById('bento');
+  var live='<span class="live"><i></i>Connected</span>';
+  var html='<article class="tile hero">'+live+'<div>'+logo('pexa')+'<h3>Settle in PEXA without leaving the matter.</h3><p>Open and work in PEXA workspaces from inside Realtime.</p></div>'+
+    '<div class="feed"><div>Workspace created <b>✓ Synced</b></div><div>Parties and property <b>✓ Synced</b></div><div>Settlement date booked <b>✓ Synced</b></div></div></article>';
+  ['docusign','livesign','easyaml','lssa'].forEach(function(k){
+    html+='<article class="tile">'+live+logo(k)+'<div><h3>'+LOGOS[k].name+'</h3><p>'+LOGOS[k].desc+'</p></div></article>';
+  });
+  ['stewart','movinghub','vaultre','o365'].forEach(function(k){
+    html+='<article class="tile">'+live+logo(k)+'<div><h3>'+LOGOS[k].name+'</h3><p>'+LOGOS[k].desc+'</p></div></article>';
+  });
+  b.innerHTML=html;
+})();
+
+/* ---------- C: journey ---------- */
+(function(){
+  var stages=[
+    ['Contract','Contract arrives from the agent',['vaultre']],
+    ['Verify','Identity and AML checks',['livesign','easyaml']],
+    ['Search','Titles and searches ordered',['lssa']],
+    ['Sign','Documents signed online',['docusign']],
+    ['Settle','Workspace, settlement, title cover',['pexa','stewart']],
+    ['Move in','Utilities connected for the client',['movinghub']]
+  ];
+  var t=document.getElementById('track');
+  t.innerHTML=stages.map(function(s,i){
+    return '<li class="stage"><span class="dot">'+(i+1)+'</span><h3>'+s[0]+'</h3><small>'+s[1]+'</small><div class="stack">'+
+      s[2].map(function(k){return '<div class="card">'+logo(k)+'<span>'+LOGOS[k].desc+'</span></div>'}).join('')+'</div></li>';
+  }).join('');
+  document.getElementById('always').innerHTML=logo('o365')+'<p><b>At every step:</b> email, calendar and documents stay in sync with Office 365.</p>';
+})();
+
+/* ---------- reveal on scroll ---------- */
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.3});
+['ib','ic'].forEach(function(id){var el=document.getElementById(id); reduce?el.classList.add('in'):io.observe(el)});
+</script>
+</body>
+</html>
